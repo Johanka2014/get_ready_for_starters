@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get ready for starters</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FEF3C7; /* Amber 100 */
+        }
+        .title-font {
+            font-family: 'Balsamiq Sans', cursive;
+        }
+        .activity-card {
+            background-color: white;
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            border: 4px solid transparent;
+        }
+        .activity-card:hover {
+            transform: translateY(-5px);
+        }
+        .nav-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .nav-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        .nav-button.active {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 4px #FBBF24; /* Amber 400 */
+        }
+        /* Hide all sections by default */
+        .content-section {
+            display: none;
+        }
+        /* Show the active section */
+        .content-section.active {
+            display: block;
+        }
+
+        /* Styles for the Name Game */
+        .name-bank {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background-color: #f3f4f6;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .draggable-name {
+            padding: 0.5rem 1rem;
+            background-color: #e0f2fe; /* sky-100 */
+            color: #0c4a6e; /* sky-900 */
+            border: 2px solid #7dd3fc; /* sky-300 */
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: grab;
+            transition: all 0.2s ease-in-out;
+        }
+        .draggable-name:hover {
+            transform: scale(1.1);
+        }
+        .draggable-name.dragging {
+            opacity: 0.5;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .drop-zone {
+            background-color: #f1f5f9; /* slate-100 */
+            border: 3px dashed #cbd5e1; /* slate-300 */
+            border-radius: 1rem;
+            padding: 1rem;
+            min-height: 200px;
+            transition: background-color 0.3s;
+        }
+        .drop-zone.drag-over {
+            background-color: #dbeafe; /* blue-200 */
+            border-color: #60a5fa; /* blue-400 */
+        }
+        .correctly-placed {
+             background-color: #d1fae5 !important; /* emerald-200 */
+             border-color: #34d399 !important; /* emerald-400 */
+             cursor: not-allowed;
+        }
+        .incorrect-drop {
+            animation: shake 0.5s;
+        }
+
+        /* Styles for button-based games */
+        .option-button {
+            transition: all 0.2s ease-in-out;
+        }
+        .option-button:hover {
+            transform: scale(1.05);
+        }
+        .correct {
+            background-color: #34D399 !important; /* Emerald 400 */
+            color: white;
+            animation: bounce 0.5s;
+        }
+        .incorrect {
+            background-color: #F87171 !important; /* Red 400 */
+            color: white;
+            animation: shake 0.5s;
+        }
+        
+        /* Styles for input-based games */
+        .name-input {
+             border: 2px solid #cbd5e1;
+             border-radius: 0.5rem;
+             padding: 0.5rem;
+             transition: border-color 0.3s;
+        }
+        .name-input.correct-input {
+            border-color: #34D399; /* Emerald 400 */
+            background-color: #f0fdf4; /* Emerald 50 */
+        }
+         .name-input.incorrect-input {
+            border-color: #F87171; /* Red 400 */
+            background-color: #fef2f2; /* Red 50 */
+        }
+
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-amber-400 p-6 text-center text-white rounded-b-3xl shadow-lg">
+        <h1 class="text-4xl md:text-6xl title-font">Get ready for starters</h1>
+        <p class="mt-2 text-lg">Let's learn English together!</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="p-6 flex flex-wrap justify-center gap-3 md:gap-4">
+        <button onclick="showSection('hello')" class="nav-button active bg-sky-400 hover:bg-sky-500 text-white font-bold py-3 px-6 rounded-full text-lg">👋 Hello!</button>
+        <button onclick="showSection('animals')" class="nav-button bg-rose-400 hover:bg-rose-500 text-white font-bold py-3 px-6 rounded-full text-lg">① I love animals!</button>
+        <button onclick="showSection('home')" class="nav-button bg-violet-400 hover:bg-violet-500 text-white font-bold py-3 px-6 rounded-full text-lg">② At home</button>
+        <button onclick="showSection('family')" class="nav-button bg-emerald-400 hover:bg-emerald-500 text-white font-bold py-3 px-6 rounded-full text-lg">③ Family and friends</button>
+        <button onclick="showSection('food')" class="nav-button bg-orange-400 hover:bg-orange-500 text-white font-bold py-3 px-6 rounded-full text-lg">④ Food!</button>
+        <button onclick="showSection('clothes')" class="nav-button bg-teal-400 hover:bg-teal-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑤ I like clothes</button>
+        <button onclick="showSection('revision1')" class="nav-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full text-lg">Revision 1</button>
+        <button onclick="showSection('look')" class="nav-button bg-sky-400 hover:bg-sky-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑥ Look at us!</button>
+        <button onclick="showSection('school')" class="nav-button bg-rose-400 hover:bg-rose-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑦ We love school!</button>
+        <button onclick="showSection('playground')" class="nav-button bg-violet-400 hover:bg-violet-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑧ In the playground</button>
+        <button onclick="showSection('hobbies')" class="nav-button bg-emerald-400 hover:bg-emerald-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑨ My hobbies</button>
+        <button onclick="showSection('day')" class="nav-button bg-orange-400 hover:bg-orange-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑩ Your day</button>
+        <button onclick="showSection('revision2')" class="nav-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full text-lg">Revision 2</button>
+        <button onclick="showSection('street')" class="nav-button bg-teal-400 hover:bg-teal-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑪ In the street</button>
+        <button onclick="showSection('grandparents')" class="nav-button bg-sky-400 hover:bg-sky-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑫ My grandparents</button>
+        <button onclick="showSection('zoo')" class="nav-button bg-rose-400 hover:bg-rose-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑬ Going to the zoo</button>
+        <button onclick="showSection('birthday')" class="nav-button bg-violet-400 hover:bg-violet-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑭ Happy birthday!</button>
+        <button onclick="showSection('beach')" class="nav-button bg-emerald-400 hover:bg-emerald-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑮ At the beach</button>
+        <button onclick="showSection('revision3')" class="nav-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full text-lg">Revision 3</button>
+        <button onclick="showSection('wordlist')" class="nav-button bg-orange-400 hover:bg-orange-500 text-white font-bold py-3 px-6 rounded-full text-lg">Wordlist</button>
+    </nav>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- Hello! Section -->
+        <section id="hello" class="content-section active">
+            <div class="space-y-8">
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Hello!</h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/hello/hello.JPG" alt="Children waving hello" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6"></h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/hello/ex_1_and_2.JPG" alt="Listen and Point Activity" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Monsters</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/hello/monsters_2.png" alt="Monster colours activity" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://wordwall.net/resource/99875192" target="_blank" rel="noopener noreferrer" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">What's your name?</h2>
+                    <div class="flex flex-col items-center gap-6">
+                        <img src="https://johanka2014.github.io/get_ready_for_starters/hello/names_1.png" alt="What's your name activity" class="rounded-2xl shadow-md w-full max-w-2xl">
+                        <p class="text-lg text-gray-600">Listen and say.</p>
+                        <audio controls src="https://johanka2014.github.io/get_ready_for_starters/hello/2d.mp3" class="w-full max-w-md">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">What are their names?</h2>
+                    <div class="max-w-xl mx-auto text-center">
+                        <img src="https://johanka2014.github.io/get_ready_for_starters/hello/names_2.jpg" alt="Children for the name game" class="rounded-2xl shadow-md w-full mb-6">
+                        <div id="written-names-game" class="space-y-4 text-lg text-left max-w-sm mx-auto">
+                            <!-- JS will populate this -->
+                        </div>
+                        <div class="mt-6">
+                             <button onclick="checkWrittenNames()" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg">Check Answers</button>
+                        </div>
+                        <div id="written-names-feedback" class="mt-4 text-center text-2xl font-bold h-8"></div>
+                    </div>
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Boy or Girl?</h2>
+                    <p class="text-center text-gray-500 mb-4">Drag the names to the correct box.</p>
+                    <div id="name-bank" class="name-bank">
+                        <!-- Names will be generated by JS -->
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/hello/boy.png" onerror="this.onerror=null;this.src='https://placehold.co/100x150/a5f3fc/083344?text=Boy';" alt="Boy icon" class="mx-auto mb-2 rounded-lg w-[100px] h-[150px] object-cover">
+                            <div id="boy-zone" class="drop-zone space-y-2" data-category="boy"></div>
+                        </div>
+                        <div class="text-center">
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/hello/girl.png" onerror="this.onerror=null;this.src='https://placehold.co/100x150/f9a8d4/500724?text=Girl';" alt="Girl icon" class="mx-auto mb-2 rounded-lg w-[100px] h-[150px] object-cover">
+                            <div id="girl-zone" class="drop-zone space-y-2" data-category="girl"></div>
+                        </div>
+                         <div class="text-center">
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/hello/girl_and_boy.png" onerror="this.onerror=null;this.src='https://placehold.co/150x150/d8b4fe/3b0764?text=Boy+%26+Girl';" alt="Boy and Girl icon" class="mx-auto mb-2 rounded-lg w-[150px] h-[150px] object-cover">
+                            <div id="both-zone" class="drop-zone space-y-2" data-category="both"></div>
+                        </div>
+                    </div>
+                     <div class="text-center mt-6">
+                        <button id="reset-names-btn" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg">Play Again</button>
+                    </div>
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Listen and Choose</h2>
+                    <div class="flex flex-col items-center gap-6">
+                        <p class="text-lg text-gray-600">Listen to the audio and answer the question.</p>
+                        <audio controls src="https://johanka2014.github.io/get_ready_for_starters/hello/3c.mp3" class="w-full max-w-md">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <div id="listen-choose-game" class="mt-4 text-center">
+                             <p id="listen-choose-question" class="text-2xl font-semibold mb-4">How old is the boy?</p>
+                             <div id="listen-choose-options" class="flex flex-wrap justify-center gap-4">
+                                <!-- JS will populate this -->
+                             </div>
+                             <div id="listen-choose-feedback" class="mt-4 text-center text-2xl font-bold h-8"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+
+        <!-- Other Sections ... -->
+        <section id="animals" class="content-section">
+            <div class="activity-card border-rose-400">
+                <h2 class="text-3xl font-bold text-center text-rose-600 mb-6">I love animals!</h2>
+                <img src="https://placehold.co/800x400/f43f5e/FFFFFF?text=Animal+Games" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Games and songs about animals can be added here.</p>
+            </div>
+            <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+
+        <section id="home" class="content-section">
+            <div class="activity-card border-violet-400">
+                <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">At home</h2>
+                <img src="https://placehold.co/800x400/8b5cf6/FFFFFF?text=House+Vocabulary" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Here you can put activities about rooms and objects in a house.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="family" class="content-section">
+            <div class="activity-card border-emerald-400">
+                <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">Family and friends</h2>
+                <img src="https://placehold.co/800x400/10b981/FFFFFF?text=My+Family" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Add activities about family members here.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+
+        <section id="food" class="content-section">
+            <div class="activity-card border-orange-400">
+                <h2 class="text-3xl font-bold text-center text-orange-600 mb-6">Food!</h2>
+                <img src="https://placehold.co/800x400/f97316/FFFFFF?text=Yummy+Food" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Activities about different foods will be here.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="clothes" class="content-section">
+            <div class="activity-card border-teal-400">
+                <h2 class="text-3xl font-bold text-center text-teal-600 mb-6">I like clothes</h2>
+                <img src="https://placehold.co/800x400/14b8a6/FFFFFF?text=My+Wardrobe" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Add games about clothing items here.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="revision1" class="content-section">
+            <div class="activity-card border-gray-500">
+                <h2 class="text-3xl font-bold text-center text-gray-600 mb-6">Revision 1</h2>
+                <img src="https://placehold.co/800x400/6b7280/FFFFFF?text=Let's+Review!" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">This section is for reviewing units 1-5.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="look" class="content-section">
+            <div class="activity-card border-sky-400">
+                <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Look at us!</h2>
+                <img src="https://placehold.co/800x400/38bdf8/FFFFFF?text=Body+Parts" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Activities about body parts go here.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="school" class="content-section">
+            <div class="activity-card border-rose-400">
+                <h2 class="text-3xl font-bold text-center text-rose-600 mb-6">We love school!</h2>
+                <img src="https://placehold.co/800x400/f43f5e/FFFFFF?text=Classroom+Fun" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Classroom objects and school activities can go here.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="playground" class="content-section">
+            <div class="activity-card border-violet-400">
+                <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">In the playground</h2>
+                <img src="https://placehold.co/800x400/8b5cf6/FFFFFF?text=Let's+Play!" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Games about playground toys and activities.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="hobbies" class="content-section">
+            <div class="activity-card border-emerald-400">
+                <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">My hobbies</h2>
+                <img src="https://placehold.co/800x400/10b981/FFFFFF?text=Fun+Activities" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Activities about different hobbies and free time.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="day" class="content-section">
+            <div class="activity-card border-orange-400">
+                <h2 class="text-3xl font-bold text-center text-orange-600 mb-6">Your day</h2>
+                <img src="https://placehold.co/800x400/f97316/FFFFFF?text=Daily+Routine" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Activities about daily routines can go here.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="revision2" class="content-section">
+            <div class="activity-card border-gray-500">
+                <h2 class="text-3xl font-bold text-center text-gray-600 mb-6">Revision 2</h2>
+                <img src="https://placehold.co/800x400/6b7280/FFFFFF?text=Practice+Time!" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">This section is for reviewing units 6-10.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="street" class="content-section">
+            <div class="activity-card border-teal-400">
+                <h2 class="text-3xl font-bold text-center text-teal-600 mb-6">In the street</h2>
+                <img src="https://placehold.co/800x400/14b8a6/FFFFFF?text=Around+Town" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Activities about places and transport in town.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="grandparents" class="content-section">
+            <div class="activity-card border-sky-400">
+                <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">My grandparents</h2>
+                <img src="https://placehold.co/800x400/38bdf8/FFFFFF?text=Grandma+%26+Grandpa" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Activities about grandparents and extended family.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="zoo" class="content-section">
+            <div class="activity-card border-rose-400">
+                <h2 class="text-3xl font-bold text-center text-rose-600 mb-6">Going to the zoo</h2>
+                <img src="https://placehold.co/800x400/f43f5e/FFFFFF?text=Zoo+Animals" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Activities about wild animals at the zoo.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="birthday" class="content-section">
+            <div class="activity-card border-violet-400">
+                <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">Happy birthday!</h2>
+                <img src="https://placehold.co/800x400/8b5cf6/FFFFFF?text=Party+Time!" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Birthday party vocabulary and songs can go here.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="beach" class="content-section">
+            <div class="activity-card border-emerald-400">
+                <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">At the beach</h2>
+                <img src="https://placehold.co/800x400/10b981/FFFFFF?text=Sun+%26+Sand" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Games about beach activities and objects.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="revision3" class="content-section">
+            <div class="activity-card border-gray-500">
+                <h2 class="text-3xl font-bold text-center text-gray-600 mb-6">Revision 3</h2>
+                <img src="https://placehold.co/800x400/6b7280/FFFFFF?text=Final+Review!" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">This section is for reviewing units 11-15.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="wordlist" class="content-section">
+            <div class="activity-card border-orange-400">
+                <h2 class="text-3xl font-bold text-center text-orange-600 mb-6">Wordlist</h2>
+                <img src="https://placehold.co/800x400/f97316/FFFFFF?text=All+the+Words!" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">A list of all the vocabulary from the modules.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+    </main>
+
+    <script>
+        // --- Navigation Logic ---
+        const sections = document.querySelectorAll('.content-section');
+        const navButtons = document.querySelectorAll('.nav-button');
+
+        function showSection(sectionId) {
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            navButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelector(`button[onclick="showSection('${sectionId}')"]`).classList.add('active');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // --- Boy or Girl Name Game ---
+        const nameData = {
+            'Dan': 'boy', 'Tony': 'boy',
+            'Sue': 'girl', 'Anna': 'girl', 'Jill': 'girl', 'May': 'girl', 'Grace': 'girl',
+            'Alex': 'both', 'Pat': 'both'
+        };
+
+        const nameBank = document.getElementById('name-bank');
+        const dropZones = document.querySelectorAll('.drop-zone');
+        const resetNamesBtn = document.getElementById('reset-names-btn');
+
+        function initializeNameGame() {
+            nameBank.innerHTML = '';
+            dropZones.forEach(zone => zone.innerHTML = '');
+
+            Object.keys(nameData).forEach(name => {
+                const nameEl = document.createElement('div');
+                nameEl.textContent = name;
+                nameEl.id = `name-${name}`;
+                nameEl.className = 'draggable-name';
+                nameEl.draggable = true;
+                nameBank.appendChild(nameEl);
+                addDragListeners(nameEl);
+            });
+        }
+
+        function addDragListeners(element) {
+            element.addEventListener('dragstart', () => {
+                element.classList.add('dragging');
+            });
+            element.addEventListener('dragend', () => {
+                element.classList.remove('dragging');
+            });
+        }
+
+        dropZones.forEach(zone => {
+            zone.addEventListener('dragover', e => {
+                e.preventDefault();
+                zone.classList.add('drag-over');
+            });
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('drag-over');
+            });
+            zone.addEventListener('drop', e => {
+                e.preventDefault();
+                zone.classList.remove('drag-over');
+                const draggingEl = document.querySelector('.dragging');
+                if (!draggingEl) return;
+
+                const name = draggingEl.textContent;
+                const correctCategory = nameData[name];
+                const dropCategory = zone.dataset.category;
+
+                if (correctCategory === dropCategory) {
+                    draggingEl.classList.remove('dragging');
+                    draggingEl.classList.add('correctly-placed');
+                    draggingEl.draggable = false;
+                    zone.appendChild(draggingEl);
+                } else {
+                    zone.classList.add('incorrect-drop');
+                    setTimeout(() => zone.classList.remove('incorrect-drop'), 500);
+                }
+            });
+        });
+
+        resetNamesBtn.addEventListener('click', initializeNameGame);
+        
+        // Initialize the game when the page loads
+        initializeNameGame();
+        
+        // --- Listen and Choose Game ---
+        const listenChooseData = {
+            question: "How old is the boy?",
+            options: ["seven", "eight", "nine"],
+            answer: "eight"
+        };
+
+        const listenChooseOptionsContainer = document.getElementById('listen-choose-options');
+        const listenChooseFeedbackEl = document.getElementById('listen-choose-feedback');
+
+        function initializeListenChooseGame() {
+            listenChooseOptionsContainer.innerHTML = '';
+            listenChooseFeedbackEl.innerHTML = '';
+
+            listenChooseData.options.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.className = 'option-button bg-sky-200 hover:bg-sky-300 font-bold py-3 px-8 rounded-lg text-xl';
+                button.onclick = () => checkListenChooseAnswer(option, button);
+                listenChooseOptionsContainer.appendChild(button);
+            });
+        }
+
+        function checkListenChooseAnswer(selectedAnswer, button) {
+            const allButtons = listenChooseOptionsContainer.querySelectorAll('button');
+            allButtons.forEach(btn => btn.disabled = true);
+
+            if (selectedAnswer === listenChooseData.answer) {
+                button.classList.add('correct');
+                listenChooseFeedbackEl.textContent = 'Correct! Well done!';
+                listenChooseFeedbackEl.style.color = '#10B981';
+            } else {
+                button.classList.add('incorrect');
+                listenChooseFeedbackEl.textContent = 'Not quite, try again next time!';
+                listenChooseFeedbackEl.style.color = '#EF4444';
+                // Highlight correct answer
+                allButtons.forEach(btn => {
+                    if (btn.textContent === listenChooseData.answer) {
+                        btn.classList.add('correct');
+                    }
+                });
+            }
+        }
+        
+        // --- Written Names Game ---
+        const writtenNamesData = [
+            { question: "1. What's his name?", answer: "Nick" },
+            { question: "2. What's her name?", answer: "Ann" },
+            { question: "3. What's his name?", answer: "Tom" },
+            { question: "4. What's her name?", answer: "Lucy" },
+        ];
+
+        const writtenNamesGameContainer = document.getElementById('written-names-game');
+        
+        function initializeWrittenNamesGame() {
+            writtenNamesGameContainer.innerHTML = '';
+            writtenNamesData.forEach((item, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'grid grid-cols-2 gap-2 items-center';
+                
+                const label = document.createElement('label');
+                label.textContent = item.question;
+                label.htmlFor = `name-input-${index}`;
+                
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.id = `name-input-${index}`;
+                input.dataset.answer = item.answer;
+                input.className = 'name-input w-full';
+                
+                questionDiv.appendChild(label);
+                questionDiv.appendChild(input);
+                writtenNamesGameContainer.appendChild(questionDiv);
+            });
+        }
+
+        function checkWrittenNames() {
+            const feedbackEl = document.getElementById('written-names-feedback');
+            let allCorrect = true;
+            writtenNamesData.forEach((item, index) => {
+                const inputEl = document.getElementById(`name-input-${index}`);
+                const userAnswer = inputEl.value.trim();
+                
+                inputEl.classList.remove('correct-input', 'incorrect-input');
+
+                if (userAnswer.toLowerCase() === item.answer.toLowerCase()) {
+                    inputEl.classList.add('correct-input');
+                } else {
+                    inputEl.classList.add('incorrect-input');
+                    allCorrect = false;
+                }
+            });
+
+            if (allCorrect) {
+                feedbackEl.textContent = 'Excellent! All correct!';
+                feedbackEl.style.color = '#10B981';
+            } else {
+                feedbackEl.textContent = 'Some are not quite right. Try again!';
+                feedbackEl.style.color = '#EF4444';
+            }
+        }
+
+        // Initialize the games
+        initializeListenChooseGame();
+        initializeWrittenNamesGame();
+
+
+    </script>
+
+</body>
+</html>
+

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-R">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get ready for starters</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -104,12 +104,12 @@
         }
         .correct {
             background-color: #34D399 !important; /* Emerald 400 */
-            color: white;
+            color: white !important;
             animation: bounce 0.5s;
         }
         .incorrect {
             background-color: #F87171 !important; /* Red 400 */
-            color: white;
+            color: white !important;
             animation: shake 0.5s;
         }
         
@@ -128,6 +128,78 @@
             border-color: #F87171; /* Red 400 */
             background-color: #fef2f2; /* Red 50 */
         }
+        
+        /* For prepositions activity */
+        .preposition-input {
+            border: 2px solid #cbd5e1;
+            border-radius: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            font-size: 1rem;
+            text-align: center;
+            width: 120px; /* Adjust as needed */
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+        .preposition-input.correct-input {
+            border-color: #34D399; /* Emerald 400 */
+            background-color: #f0fdf4; /* Emerald 50 */
+        }
+        .preposition-input.incorrect-input {
+            border-color: #F87171; /* Red 400 */
+            background-color: #fef2f2; /* Red 50 */
+        }
+
+        /* For Look and Complete activity */
+        .complete-input {
+            border: 2px solid #cbd5e1;
+            border-radius: 0.375rem; /* rounded-md */
+            padding: 0.25rem 0.5rem;
+            width: 100px; /* or adjust as needed */
+            text-align: center;
+            font-size: 1rem;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+        .complete-input.correct-input {
+            border-color: #34D399; /* Emerald 400 */
+            background-color: #f0fdf4; /* Emerald 50 */
+        }
+        .complete-input.incorrect-input {
+            border-color: #F87171; /* Red 400 */
+            background-color: #fef2f2; /* Red 50 */
+        }
+        .draggable-match-item {
+            padding: 0.5rem 1rem;
+            background-color: #fee2e2; /* Red 100 */
+            color: #991b1b; /* Red 800 */
+            border: 2px solid #fca5a5; /* Red 300 */
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: grab;
+            transition: all 0.2s ease-in-out;
+            text-align: center;
+        }
+        .draggable-match-item.dragging {
+            opacity: 0.5;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .match-drop-zone {
+            background-color: #f1f5f9; /* slate-100 */
+            border: 3px dashed #cbd5e1; /* slate-300 */
+            border-radius: 1rem;
+            padding: 1rem;
+            min-height: 50px; /* Smaller height for single items */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        .match-drop-zone.drag-over {
+            background-color: #dbeafe; /* blue-200 */
+            border-color: #60a5fa; /* blue-400 */
+        }
+        .match-drop-zone.correctly-placed {
+            background-color: #d1fae5 !important; /* emerald-200 */
+            border-color: #34d399 !important; /* emerald-400 */
+        }
 
 
         @keyframes shake {
@@ -144,14 +216,12 @@
 </head>
 <body class="text-gray-800">
 
-    <!-- Header -->
-    <header class="bg-amber-400 p-6 text-center text-white rounded-b-3xl shadow-lg">
+    <!-- Header --><header class="bg-amber-400 p-6 text-center text-white rounded-b-3xl shadow-lg">
         <h1 class="text-4xl md:text-6xl title-font">Get ready for starters</h1>
         <p class="mt-2 text-lg">Let's learn English together!</p>
     </header>
 
-    <!-- Navigation -->
-    <nav class="p-6 flex flex-wrap justify-center gap-3 md:gap-4">
+    <!-- Navigation --><nav class="p-6 flex flex-wrap justify-center gap-3 md:gap-4">
         <button onclick="showSection('hello')" class="nav-button active bg-sky-400 hover:bg-sky-500 text-white font-bold py-3 px-6 rounded-full text-lg">👋 Hello!</button>
         <button onclick="showSection('animals')" class="nav-button bg-rose-400 hover:bg-rose-500 text-white font-bold py-3 px-6 rounded-full text-lg">① I love animals!</button>
         <button onclick="showSection('home')" class="nav-button bg-violet-400 hover:bg-violet-500 text-white font-bold py-3 px-6 rounded-full text-lg">② At home</button>
@@ -176,8 +246,7 @@
 
     <main class="container mx-auto p-4 md:p-8">
 
-        <!-- Hello! Section -->
-        <section id="hello" class="content-section active">
+        <!-- Hello! Section --><section id="hello" class="content-section active">
             <div class="space-y-8">
                 <div class="activity-card border-sky-400">
                     <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Hello!</h2>
@@ -216,8 +285,7 @@
                     <div class="max-w-xl mx-auto text-center">
                         <img src="https://johanka2014.github.io/get_ready_for_starters/hello/names_2.jpg" alt="Children for the name game" class="rounded-2xl shadow-md w-full mb-6">
                         <div id="written-names-game" class="space-y-4 text-lg text-left max-w-sm mx-auto">
-                            <!-- JS will populate this -->
-                        </div>
+                            <!-- JS will populate this --></div>
                         <div class="mt-6">
                              <button onclick="checkWrittenNames()" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg">Check Answers</button>
                         </div>
@@ -228,8 +296,7 @@
                     <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Boy or Girl?</h2>
                     <p class="text-center text-gray-500 mb-4">Drag the names to the correct box.</p>
                     <div id="name-bank" class="name-bank">
-                        <!-- Names will be generated by JS -->
-                    </div>
+                        <!-- Names will be generated by JS --></div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div class="text-center">
                             <img src="https://johanka2014.github.io/get_ready_for_starters/hello/boy.png" onerror="this.onerror=null;this.src='https://placehold.co/100x150/a5f3fc/083344?text=Boy';" alt="Boy icon" class="mx-auto mb-2 rounded-lg w-[100px] h-[150px] object-cover">
@@ -257,8 +324,7 @@
                         </audio>
                         <div id="listen-choose-game" class="mt-4 text-center">
                              <div id="listen-choose-options" class="flex flex-wrap justify-center gap-4">
-                                <!-- JS will populate this -->
-                             </div>
+                                <!-- JS will populate this --></div>
                              <div id="listen-choose-feedback" class="mt-4 text-center text-xl font-semibold h-8"></div>
                         </div>
                     </div>
@@ -282,8 +348,7 @@
                     <div id="word-match-game" class="text-center">
                         <img id="word-match-image" src="" alt="Match the word" class="rounded-2xl shadow-md w-full max-w-sm mx-auto h-48 object-contain mb-6 bg-gray-100 p-2">
                         <div id="word-match-options" class="flex flex-wrap justify-center gap-4">
-                            <!-- Options will be generated by JS -->
-                        </div>
+                            <!-- Options will be generated by JS --></div>
                         <div id="word-match-feedback" class="mt-6 text-2xl font-bold h-10"></div>
                         <button id="word-match-next-btn" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg hidden">Next</button>
                     </div>
@@ -346,7 +411,7 @@
                     </div>
                 </div>
                 <div class="activity-card border-sky-400">
-                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Final colours practice</h2>
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Final Colours practice</h2>
                     <img src="https://johanka2014.github.io/get_ready_for_starters/hello/colours_7.png" alt="Colours Song Sheet" class="rounded-2xl shadow-md w-full mx-auto">
                 </div>
             </div>
@@ -355,8 +420,7 @@
             </div>
         </section>
 
-        <!-- Other Sections ... -->
-        <section id="animals" class="content-section">
+        <!-- Other Sections ... --><section id="animals" class="content-section">
             <div class="activity-card border-rose-400">
                 <h2 class="text-3xl font-bold text-center text-rose-600 mb-6">I love animals!</h2>
                 <img src="https://placehold.co/800x400/f43f5e/FFFFFF?text=Animal+Games" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
@@ -368,10 +432,186 @@
         </section>
 
         <section id="home" class="content-section">
-            <div class="activity-card border-violet-400">
-                <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">At home</h2>
-                <img src="https://placehold.co/800x400/8b5cf6/FFFFFF?text=House+Vocabulary" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
-                <p class="text-center mt-4 text-xl">Here you can put activities about rooms and objects in a house.</p>
+            <div class="space-y-8">
+                <div class="activity-card border-violet-400">
+                    <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">At home</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="http://johanka2014.github.io/get_ready_for_starters/mod_2/1.png" alt="At home vocabulary" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://wordwall.net/resource/101105033" target="_blank" rel="noopener noreferrer" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="activity-card border-violet-400">
+                    <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">Look and Complete the Words. Match!</h2>
+                    <p class="text-center text-gray-600 mb-4">Complete the words on the left, then drag them to match the room on the right.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        <!-- Left Column: Items with fill-in-the-blanks --><div class="space-y-6">
+                            <div id="item-container-1" class="flex items-center gap-4">
+                                <span class="font-bold text-xl">1</span>
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/vocab_quiz_1.png" alt="Flowers" class="w-20 h-20 object-contain rounded-lg shadow-sm bg-gray-50 p-1">
+                                <p class="text-lg">f<input type="text" id="complete-input-1a" class="complete-input w-12 mx-1">o<input type="text" id="complete-input-1b" class="complete-input w-12 mx-1">e<input type="text" id="complete-input-1c" class="complete-input w-12 mx-1">s</p>
+                                <div id="match-item-1" class="draggable-match-item" draggable="true" data-match-id="flowers">Flowers</div>
+                            </div>
+                            <div id="item-container-2" class="flex items-center gap-4">
+                                <span class="font-bold text-xl">2</span>
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/vocab_quiz_2.png" alt="Picture of fruit" class="w-20 h-20 object-contain rounded-lg shadow-sm bg-gray-50 p-1">
+                                <p class="text-lg">p<input type="text" id="complete-input-2a" class="complete-input w-12 mx-1">c<input type="text" id="complete-input-2b" class="complete-input w-12 mx-1">u<input type="text" id="complete-input-2c" class="complete-input w-12 mx-1">e</p>
+                                <div id="match-item-2" class="draggable-match-item" draggable="true" data-match-id="picture">Picture</div>
+                            </div>
+                            <div id="item-container-3" class="flex items-center gap-4">
+                                <span class="font-bold text-xl">3</span>
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/vocab_quiz_3.png" alt="Table" class="w-20 h-20 object-contain rounded-lg shadow-sm bg-gray-50 p-1">
+                                <p class="text-lg">d<input type="text" id="complete-input-3a" class="complete-input w-12 mx-1">e<input type="text" id="complete-input-3b" class="complete-input w-12 mx-1">k</p>
+                                <div id="match-item-3" class="draggable-match-item" draggable="true" data-match-id="desk">Desk</div>
+                            </div>
+                            <div id="item-container-4" class="flex items-center gap-4">
+                                <span class="font-bold text-xl">4</span>
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/vocab_quiz_4.png" alt="Radio" class="w-20 h-20 object-contain rounded-lg shadow-sm bg-gray-50 p-1">
+                                <p class="text-lg">r<input type="text" id="complete-input-4a" class="complete-input w-12 mx-1">d<input type="text" id="complete-input-4b" class="complete-input w-12 mx-1">o</p>
+                                <div id="match-item-4" class="draggable-match-item" draggable="true" data-match-id="radio">Radio</div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Rooms with drop zones --><div class="space-y-6">
+                            <div class="flex items-center gap-4">
+                                <span class="font-bold text-xl">a</span>
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/vocab_quiz_a.png" alt="Dining room" class="w-20 h-20 object-contain rounded-lg shadow-sm bg-gray-50 p-1">
+                                <p class="text-lg">d<input type="text" id="complete-input-a1" class="complete-input w-12 mx-1">n<input type="text" id="complete-input-a2" class="complete-input w-12 mx-1">n<input type="text" id="complete-input-a3" class="complete-input w-12 mx-1">g r<input type="text" id="complete-input-a4" class="complete-input w-12 mx-1">o<input type="text" id="complete-input-a5" class="complete-input w-12 mx-1">m</p>
+                                <div id="match-zone-a" class="match-drop-zone w-32" data-correct-item="flowers"></div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="font-bold text-xl">b</span>
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/vocab_quiz_b.png" alt="Living room" class="w-20 h-20 object-contain rounded-lg shadow-sm bg-gray-50 p-1">
+                                <p class="text-lg">l<input type="text" id="complete-input-b1" class="complete-input w-12 mx-1">v<input type="text" id="complete-input-b2" class="complete-input w-12 mx-1">n<input type="text" id="complete-input-b3" class="complete-input w-12 mx-1">g r<input type="text" id="complete-input-b4" class="complete-input w-12 mx-1">o<input type="text" id="complete-input-b5" class="complete-input w-12 mx-1">m</p>
+                                <div id="match-zone-b" class="match-drop-zone w-32" data-correct-item="radio"></div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="font-bold text-xl">c</span>
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/vocab_quiz_c.png" alt="Garden" class="w-20 h-20 object-contain rounded-lg shadow-sm bg-gray-50 p-1">
+                                <p class="text-lg">g<input type="text" id="complete-input-c1" class="complete-input w-12 mx-1">r<input type="text" id="complete-input-c2" class="complete-input w-12 mx-1">d<input type="text" id="complete-input-c3" class="complete-input w-12 mx-1">n</p>
+                                <div id="match-zone-c" class="match-drop-zone w-32" data-correct-item="picture"></div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="font-bold text-xl">d</span>
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/vocab_quiz_d.png" alt="Kitchen" class="w-20 h-20 object-contain rounded-lg shadow-sm bg-gray-50 p-1">
+                                <p class="text-lg">k<input type="text" id="complete-input-d1" class="complete-input w-12 mx-1">t<input type="text" id="complete-input-d2" class="complete-input w-12 mx-1">h<input type="text" id="complete-input-d3" class="complete-input w-12 mx-1">n</p>
+                                <div id="match-zone-d" class="match-drop-zone w-32" data-correct-item="desk"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-8">
+                        <button onclick="checkLookAndComplete()" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 px-6 rounded-full text-lg">Check Answers</button>
+                        <button onclick="resetLookAndComplete()" class="nav-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full text-lg ml-4">Reset</button>
+                    </div>
+                    <div id="look-complete-feedback" class="mt-4 text-center text-xl font-bold h-8"></div>
+                </div>
+
+                <div class="activity-card border-violet-400">
+                    <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">Rooms in the House</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="http://johanka2014.github.io/get_ready_for_starters/mod_2/2.png" alt="Rooms in the house activity" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://wordwall.net/resource/90982911" target="_blank" rel="noopener noreferrer" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-violet-400">
+                    <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">Where is it?</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="http://johanka2014.github.io/get_ready_for_starters/mod_2/3.png" alt="Where is it? activity" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://wordwall.net/resource/90982911" target="_blank" rel="noopener noreferrer" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-violet-400">
+                    <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">Where's Sam's cat?</h2>
+                    <div class="flex flex-col items-center gap-6">
+                        <p class="text-lg text-gray-600 mb-4">Look at the pictures and type the correct preposition.</p>
+                        <div class="grid grid-cols-2 gap-8 items-start max-w-2xl w-full">
+                            <div class="text-center">
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/cat_by_door.png" alt="Cat by the door" class="rounded-lg shadow-md w-full mb-2">
+                                <p class="text-lg">1. It's <input type="text" id="preposition-1" class="preposition-input"> the door.</p>
+                            </div>
+                            <div class="text-center">
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/cat_under_bed.png" alt="Cat under the bed" class="rounded-lg shadow-md w-full mb-2">
+                                <p class="text-lg">2. It's <input type="text" id="preposition-2" class="preposition-input"> the bed.</p>
+                            </div>
+                            <div class="text-center">
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/cat_behind_sofa.png" alt="Cat behind the sofa" class="rounded-lg shadow-md w-full mb-2">
+                                <p class="text-lg">3. It's <input type="text" id="preposition-3" class="preposition-input"> the sofa.</p>
+                            </div>
+                            <div class="text-center">
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/cat_between_dogs.png" alt="Cat between the dogs" class="rounded-lg shadow-md w-full mb-2">
+                                <p class="text-lg">4. It's <input type="text" id="preposition-4" class="preposition-input"> the dogs.</p>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <button onclick="checkPrepositions()" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 px-6 rounded-full text-lg">Check Answers</button>
+
+                        </div>
+                        <div id="preposition-feedback" class="mt-4 text-center text-xl font-bold h-8"></div>
+                    </div>
+                </div>
+                <div class="activity-card border-violet-400">
+                    <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">Prepositions Practice</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="http://johanka2014.github.io/get_ready_for_starters/mod_2/4.png" alt="Prepositions practice activity" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://learningapps.org/display?v=ptcoc76wn21" target="_blank" rel="noopener noreferrer" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-violet-400">
+                    <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">In the House Song</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="http://johanka2014.github.io/get_ready_for_starters/mod_2/5.jpg" alt="In the House Song" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center space-y-4">
+                            <p class="text-xl mb-2 text-gray-600">Click a button to play!</p>
+                            <a href="https://wordwall.net/resource/101106418" target="_blank" rel="noopener noreferrer" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                            <a href="https://youtu.be/VqW_NLnkUpA?si=D_97ev8iaJNNO4IS" target="_blank" rel="noopener noreferrer" class="nav-button bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Watch Song (YouTube)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-violet-400">
+                    <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">Phone Story Quiz</h2>
+                    <img src="http://johanka2014.github.io/get_ready_for_starters/mod_2/phone_story.JPG" alt="Phone Story" class="rounded-2xl shadow-md w-full max-w-2xl mx-auto mb-6">
+                    
+                    <div id="story-quiz-container" class="max-w-xl mx-auto space-y-6">
+                        <!-- Questions will be injected by JS --></div>
+                    
+                    <div class="text-center mt-6">
+                        <button id="story-quiz-check-btn" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 px-6 rounded-full text-lg">Check Answers</button>
+                    </div>
+                    <div id="story-quiz-feedback" class="mt-4 text-center text-xl font-bold h-8"></div>
+                </div>
             </div>
              <div class="text-center mt-8">
                 <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
@@ -450,7 +690,7 @@
                 <img src="https://placehold.co/800x400/8b5cf6/FFFFFF?text=Let's+Play!" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
                 <p class="text-center mt-4 text-xl">Games about playground toys and activities.</p>
             </div>
-             <div class="text-center mt-8">
+             <div classs="text-center mt-8">
                 <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
             </div>
         </section>
@@ -524,7 +764,7 @@
         <section id="birthday" class="content-section">
             <div class="activity-card border-violet-400">
                 <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">Happy birthday!</h2>
-                <img src="https://placehold.co/800x400/8b5cf6/FFFFFF?text=Party+Time!" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <img src="httpsD://placehold.co/800x400/8b5cf6/FFFFFF?text=Party+Time!" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
                 <p class="text-center mt-4 text-xl">Birthday party vocabulary and songs can go here.</p>
             </div>
              <div class="text-center mt-8">
@@ -597,6 +837,7 @@
         const resetNamesBtn = document.getElementById('reset-names-btn');
 
         function initializeNameGame() {
+            if (!nameBank) return; // Don't run if not on the right page
             nameBank.innerHTML = '';
             dropZones.forEach(zone => zone.innerHTML = '');
 
@@ -650,10 +891,9 @@
             });
         });
 
-        resetNamesBtn.addEventListener('click', initializeNameGame);
-        
-        // Initialize the game when the page loads
-        initializeNameGame();
+        if (resetNamesBtn) {
+            resetNamesBtn.addEventListener('click', initializeNameGame);
+        }
         
         // --- Listen and Choose Game ---
         const listenChooseData = {
@@ -666,6 +906,8 @@
         let foundAnswers = 0;
 
         function initializeListenChooseGame() {
+            if (!listenChooseOptionsContainer) return; // Don't run if not on the right page
+            
             listenChooseOptionsContainer.innerHTML = '';
             listenChooseFeedbackEl.innerHTML = `Found: 0 / ${listenChooseData.correctAnswers.length}`;
             listenChooseFeedbackEl.style.color = '#4B5563'; // Reset color
@@ -681,8 +923,9 @@
                 listenChooseOptionsContainer.appendChild(button);
             });
 
-            if (!document.getElementById('listen-reset-btn')) {
-                const resetButton = document.createElement('button');
+            let resetButton = document.getElementById('listen-reset-btn');
+            if (!resetButton) {
+                resetButton = document.createElement('button');
                 resetButton.id = 'listen-reset-btn';
                 resetButton.textContent = 'Play Again';
                 resetButton.className = 'nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg mt-6';
@@ -723,6 +966,8 @@
         const writtenNamesGameContainer = document.getElementById('written-names-game');
         
         function initializeWrittenNamesGame() {
+            if (!writtenNamesGameContainer) return; // Don't run if not on the right page
+            
             writtenNamesGameContainer.innerHTML = '';
             writtenNamesData.forEach((item, index) => {
                 const questionDiv = document.createElement('div');
@@ -746,6 +991,8 @@
 
         function checkWrittenNames() {
             const feedbackEl = document.getElementById('written-names-feedback');
+            if (!feedbackEl) return;
+            
             let allCorrect = true;
             writtenNamesData.forEach((item, index) => {
                 const inputEl = document.getElementById(`name-input-${index}`);
@@ -834,41 +1081,386 @@
                 wordMatchNextBtn.textContent = 'Next';
             }
         }
-
-        wordMatchNextBtn.addEventListener('click', () => {
-            currentWordMatchIndex++;
-            if (currentWordMatchIndex >= wordMatchData.length) {
-                currentWordMatchIndex = 0;
-            }
-            showWordMatchQuestion(currentWordMatchIndex);
-        });
+        
+        if (wordMatchNextBtn) {
+            wordMatchNextBtn.addEventListener('click', () => {
+                currentWordMatchIndex++;
+                if (currentWordMatchIndex >= wordMatchData.length) {
+                    currentWordMatchIndex = 0;
+                }
+                showWordMatchQuestion(currentWordMatchIndex);
+            });
+        }
         
         function initializeWordMatchGame() {
+            if (!wordMatchImageEl) return; // Don't run if not on the right page
             currentWordMatchIndex = 0;
             showWordMatchQuestion(currentWordMatchIndex);
         }
 
-        // Initialize the games
+        // --- Prepositions Activity (Where's Sam's cat?) ---
+        const prepositionAnswers = {
+            "preposition-1": "in front of",
+            "preposition-2": "under",
+            "preposition-3": "behind",
+            "preposition-4": "between"
+        };
+
+        function checkPrepositions() {
+            const feedbackEl = document.getElementById('preposition-feedback');
+            if (!feedbackEl) return;
+            
+            let allCorrect = true;
+            let correctCount = 0;
+            const totalQuestions = Object.keys(prepositionAnswers).length;
+
+            for (const inputId in prepositionAnswers) {
+                const inputEl = document.getElementById(inputId);
+                if (inputEl) {
+                    const userAnswer = inputEl.value.trim().toLowerCase();
+                    const correctAnswer = prepositionAnswers[inputId].toLowerCase();
+
+                    inputEl.classList.remove('correct-input', 'incorrect-input');
+
+                    if (userAnswer === correctAnswer) {
+                        inputEl.classList.add('correct-input');
+                        correctCount++;
+                    } else {
+                        inputEl.classList.add('incorrect-input');
+                        allCorrect = false;
+                    }
+                } else {
+                    allCorrect = false; // Mark as incorrect if element not found
+                }
+            }
+
+            if (allCorrect) {
+                feedbackEl.textContent = `Fantastic! All ${totalQuestions} correct!`;
+                feedbackEl.style.color = '#10B981';
+            } else {
+                feedbackEl.textContent = `You got ${correctCount} out of ${totalQuestions} correct. Keep trying!`;
+                feedbackEl.style.color = '#EF4444';
+            }
+        }
+
+        // --- Story Quiz ---
+        const storyQuizData = [
+            {
+                question: "1. Who is looking for the phone?",
+                options: ["Sam", "Sam's mom", "The dog"],
+                answer: "Sam's mom"
+            },
+            {
+                question: "2. Is the phone in the bedroom?",
+                options: ["Yes, it is", "No, it isn't"],
+                answer: "No, it isn't"
+            },
+            {
+                question: "3. Where does Sam's mom think the phone is? (Frame 3)",
+                options: ["In the garden", "In the car", "In the living room"],
+                answer: "In the car"
+            },
+            {
+                question: "4. Where is the phone at the end?",
+                options: ["In the car", "In the living room", "In the garden"],
+                answer: "In the garden"
+            }
+        ];
+
+        const storyQuizContainer = document.getElementById('story-quiz-container');
+
+        function initializeStoryQuiz() {
+            if (!storyQuizContainer) return;
+            storyQuizContainer.innerHTML = '';
+
+            storyQuizData.forEach((item, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'story-question';
+                
+                const questionP = document.createElement('p');
+                questionP.className = 'text-lg font-semibold mb-3';
+                questionP.textContent = item.question;
+                questionDiv.appendChild(questionP);
+
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'flex flex-wrap gap-3';
+                optionsDiv.id = `story-q-${index}`;
+
+                item.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = 'option-button bg-violet-200 hover:bg-violet-300 font-semibold py-2 px-4 rounded-lg text-md';
+                    // We use a data attribute to store the "group" for checking
+                    button.dataset.group = `story-q-${index}`;
+                    button.dataset.answer = option;
+                    button.onclick = () => selectStoryOption(button);
+                    optionsDiv.appendChild(button);
+                });
+
+                questionDiv.appendChild(optionsDiv);
+                storyQuizContainer.appendChild(questionDiv);
+            });
+
+            const checkBtn = document.getElementById('story-quiz-check-btn');
+            if(checkBtn){
+                checkBtn.onclick = checkStoryQuiz;
+            }
+        }
+
+        function selectStoryOption(selectedButton) {
+            // Get all buttons in the same group
+            const groupName = selectedButton.dataset.group;
+            const buttonsInGroup = document.querySelectorAll(`button[data-group="${groupName}"]`);
+            
+            // Remove 'selected' class from all buttons in the group
+            buttonsInGroup.forEach(btn => {
+                btn.classList.remove('bg-violet-500', 'text-white');
+                btn.classList.add('bg-violet-200', 'hover:bg-violet-300');
+                btn.dataset.selected = 'false';
+            });
+
+            // Add 'selected' class to the clicked button
+            selectedButton.classList.add('bg-violet-500', 'text-white');
+            selectedButton.classList.remove('bg-violet-200', 'hover:bg-violet-300');
+            selectedButton.dataset.selected = 'true';
+        }
+
+        function checkStoryQuiz() {
+            const feedbackEl = document.getElementById('story-quiz-feedback');
+            if (!feedbackEl) return;
+
+            let allCorrect = true;
+            let correctCount = 0;
+            const totalQuestions = storyQuizData.length;
+
+            storyQuizData.forEach((item, index) => {
+                const groupName = `story-q-${index}`;
+                const buttonsInGroup = document.querySelectorAll(`button[data-group="${groupName}"]`);
+                const selectedButton = document.querySelector(`button[data-group="${groupName}"][data-selected="true"]`);
+                
+                // Reset styles
+                buttonsInGroup.forEach(btn => {
+                    btn.classList.remove('correct', 'incorrect');
+                });
+
+                if (selectedButton) {
+                    const userAnswer = selectedButton.dataset.answer;
+                    if (userAnswer === item.answer) {
+                        selectedButton.classList.add('correct');
+                        correctCount++;
+                    } else {
+                        selectedButton.classList.add('incorrect');
+                        allCorrect = false;
+                        // Also show the correct one
+                        buttonsInGroup.forEach(btn => {
+                            if (btn.dataset.answer === item.answer) {
+                                btn.classList.add('correct');
+                            }
+                        });
+                    }
+                } else {
+                    // No answer selected for this question
+                    allCorrect = false;
+                }
+            });
+
+            if (allCorrect) {
+                feedbackEl.textContent = `Excellent! All ${totalQuestions} correct!`;
+                feedbackEl.style.color = '#10B981';
+            } else {
+                feedbackEl.textContent = `You got ${correctCount} out of ${totalQuestions}. Check the answers!`;
+                feedbackEl.style.color = '#EF4444';
+            }
+        }
+
+        // --- Look and Complete the Words. Match! Activity ---
+        const lookCompleteWordAnswers = {
+            "complete-input-1a": "l", "complete-input-1b": "w", "complete-input-1c": "r", // flowers
+            "complete-input-2a": "i", "complete-input-2b": "t", "complete-input-2c": "r", // picture
+            "complete-input-3a": "e", "complete-input-3b": "s", // desk
+            "complete-input-4a": "a", "complete-input-4b": "i", // radio
+            "complete-input-a1": "i", "complete-input-a2": "i", "complete-input-a3": "o", "complete-input-a4": "o", "complete-input-a5": "m", // dining room
+            "complete-input-b1": "i", "complete-input-b2": "i", "complete-input-b3": "i", "complete-input-b4": "o", "complete-input-b5": "m", // living room
+            "complete-input-c1": "a", "complete-input-c2": "e", "complete-input-c3": "e", // garden
+            "complete-input-d1": "i", "complete-input-d2": "c", "complete-input-d3": "e" // kitchen
+        };
+
+        const matchData = {
+            "flowers": "match-zone-a", // dining room
+            "picture": "match-zone-c", // garden
+            "desk": "match-zone-d",    // kitchen
+            "radio": "match-zone-b"    // living room
+        };
+
+        function initializeLookAndComplete() {
+            // Reset input fields
+            for (const inputId in lookCompleteWordAnswers) {
+                const inputEl = document.getElementById(inputId);
+                if (inputEl) {
+                    inputEl.value = '';
+                    inputEl.classList.remove('correct-input', 'incorrect-input');
+                    inputEl.disabled = false;
+                }
+            }
+
+            // Reset draggable items and drop zones
+            const draggableItems = document.querySelectorAll('.draggable-match-item');
+            const matchDropZones = document.querySelectorAll('.match-drop-zone');
+
+            draggableItems.forEach(item => {
+                item.classList.remove('correctly-placed');
+                item.draggable = true;
+                item.style.opacity = '1';
+                // Move item back to its original parent if it was moved
+                const originalParent = document.getElementById(item.id.replace('match-item-', 'item-container-'));
+                if (originalParent && item.parentNode !== originalParent) {
+                     originalParent.appendChild(item);
+                }
+            });
+
+            matchDropZones.forEach(zone => {
+                zone.innerHTML = '';
+                zone.classList.remove('correctly-placed');
+                zone.classList.remove('drag-over');
+            });
+            
+            const feedbackEl = document.getElementById('look-complete-feedback');
+            if(feedbackEl) {
+                feedbackEl.textContent = '';
+            }
+        }
+
+        function checkLookAndComplete() {
+            let allWordsCorrect = true;
+            let allMatchesCorrect = true;
+            const feedbackEl = document.getElementById('look-complete-feedback');
+            let totalWordCorrect = 0;
+            const totalWords = Object.keys(lookCompleteWordAnswers).length;
+
+            // Check fill-in-the-blanks
+            for (const inputId in lookCompleteWordAnswers) {
+                const inputEl = document.getElementById(inputId);
+                if (inputEl) {
+                    const userAnswer = inputEl.value.trim().toLowerCase();
+                    const correctAnswer = lookCompleteWordAnswers[inputId].toLowerCase();
+
+                    inputEl.classList.remove('correct-input', 'incorrect-input');
+
+                    if (userAnswer === correctAnswer) {
+                        inputEl.classList.add('correct-input');
+                        totalWordCorrect++;
+                    } else {
+                        inputEl.classList.add('incorrect-input');
+                        allWordsCorrect = false;
+                    }
+                }
+            }
+
+            // Check matches
+            for (const itemKey in matchData) {
+                const correctZoneId = matchData[itemKey]; // e.g., "match-zone-a"
+                const correctZone = document.getElementById(correctZoneId);
+                const droppedItem = correctZone.querySelector('.draggable-match-item');
+
+                if (droppedItem && droppedItem.dataset.matchId === itemKey) {
+                    // Correct match
+                    // Styling for correct drop is applied during drop event
+                } else {
+                    allMatchesCorrect = false;
+                    // If a zone is empty or has a wrong item, mark it
+                    correctZone.classList.remove('correctly-placed'); // Ensure it's not marked correct if empty/wrong
+                    correctZone.classList.add('incorrect-drop'); // Add temporary shake effect
+                    setTimeout(() => correctZone.classList.remove('incorrect-drop'), 500);
+                }
+            }
+
+            if (allWordsCorrect && allMatchesCorrect) {
+                feedbackEl.textContent = 'Fantastic! All words completed and matched correctly!';
+                feedbackEl.style.color = '#10B981';
+            } else if (allWordsCorrect) {
+                feedbackEl.textContent = 'Words are correct! Now check your matches.';
+                feedbackEl.style.color = '#EF4444';
+            }
+            else if (allMatchesCorrect) {
+                feedbackEl.textContent = 'Matches are correct! Now check your words.';
+                feedbackEl.style.color = '#EF4444';
+            }
+            else {
+                feedbackEl.textContent = `You got ${totalWordCorrect} out of ${totalWords} words correct. Keep trying! Also check your matches.`;
+                feedbackEl.style.color = '#EF4444';
+            }
+        }
+
+        // Drag and Drop for Matching (Look and Complete)
+        let draggedItem = null;
+
+        document.querySelectorAll('.draggable-match-item').forEach(item => {
+            item.addEventListener('dragstart', (e) => {
+                draggedItem = item;
+                e.dataTransfer.setData('text/plain', item.dataset.matchId);
+                item.classList.add('dragging');
+            });
+
+            item.addEventListener('dragend', () => {
+                item.classList.remove('dragging');
+                draggedItem = null;
+            });
+        });
+
+        document.querySelectorAll('.match-drop-zone').forEach(zone => {
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault(); // Allow drop
+                zone.classList.add('drag-over');
+            });
+
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('drag-over');
+            });
+
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.classList.remove('drag-over');
+
+                if (draggedItem && zone.children.length === 0) { // Only drop if zone is empty
+                    const droppedItemId = e.dataTransfer.getData('text/plain');
+                    
+                    if (zone.dataset.correctItem === droppedItemId) {
+                        zone.appendChild(draggedItem);
+                        draggedItem.classList.add('correctly-placed');
+                        draggedItem.draggable = false;
+                    } else {
+                        zone.classList.add('incorrect-drop');
+                        setTimeout(() => zone.classList.remove('incorrect-drop'), 500);
+                    }
+                }
+            });
+        });
+
+        function resetLookAndComplete() {
+            initializeLookAndComplete();
+        }
+
+
+        // Initialize all games on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeNameGame();
+            initializeListenChooseGame();
+            initializeWrittenNamesGame();
+            initializeWordMatchGame();
+            initializeStoryQuiz();
+            initializeLookAndComplete(); // Initialize the new activity
+        });
+        
+        // Ensure initialization runs even if DOMContentLoaded already fired
+        initializeNameGame();
         initializeListenChooseGame();
         initializeWrittenNamesGame();
         initializeWordMatchGame();
+        initializeStoryQuiz();
+        initializeLookAndComplete();
 
 
     </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

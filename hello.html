@@ -675,17 +675,9 @@
                     </div>
                 </div>
                 <div class="activity-card border-emerald-400">
-                    <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">Who is in the Picture?</h2>
+                    <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">How Many?</h2>
                     <img src="https://johanka2014.github.io/get_ready_for_starters/mod_3/27.png" alt="Family yes/no quiz" class="rounded-2xl shadow-md w-full max-w-2xl mx-auto mb-6">
                     
-                    <div id="family-quiz-container" class="max-w-2xl mx-auto space-y-4">
-                        <!-- Questions will be injected by JS -->
-                    </div>
-                    
-                    <div class="text-center mt-6">
-                        <button id="family-quiz-check-btn" class="nav-button bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-full text-lg">Check Answers</button>
-                    </div>
-                    <div id="family-quiz-feedback" class="mt-4 text-center text-xl font-bold h-8"></div>
                 </div>
             </div>
              <div class="text-center mt-8">
@@ -1338,131 +1330,7 @@
         }
 
         // --- Family Quiz (Yes/No) ---
-        const familyQuizData = [
-            { question: "1. The baby is happy.", answer: "yes" },
-            { question: "2. The boy is sad.", answer: "no" },
-            { question: "3. The brother and sister are ugly.", answer: "no" },
-            { question: "4. The father is young.", answer: "no" },
-            { question: "5. The mother is beautiful.", answer: "yes" },
-            { question: "6. The grandfather is old.", answer: "yes" },
-            { question: "7. The grandmother is short.", answer: "no" }
-        ];
-
-        const familyQuizContainer = document.getElementById('family-quiz-container');
-
-        function initializeFamilyQuiz() {
-            if (!familyQuizContainer) return;
-            familyQuizContainer.innerHTML = '';
-
-            familyQuizData.forEach((item, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'family-quiz-question flex flex-col sm:flex-row justify-between items-center bg-gray-50 p-3 rounded-lg';
-                
-                const questionP = document.createElement('p');
-                questionP.className = 'text-lg font-semibold mb-2 sm:mb-0';
-                questionP.textContent = item.question;
-                questionDiv.appendChild(questionP);
-
-                const optionsDiv = document.createElement('div');
-                optionsDiv.className = 'flex gap-3';
-                optionsDiv.id = `family-q-${index}`;
-
-                const yesButton = document.createElement('button');
-                yesButton.textContent = 'Yes';
-                yesButton.className = 'option-button bg-emerald-200 hover:bg-emerald-300 font-semibold py-2 px-6 rounded-lg text-md';
-                yesButton.dataset.group = `family-q-${index}`;
-                yesButton.dataset.answer = 'yes';
-                yesButton.onclick = () => selectFamilyQuizOption(yesButton);
-                optionsDiv.appendChild(yesButton);
-                
-                const noButton = document.createElement('button');
-                noButton.textContent = 'No';
-                noButton.className = 'option-button bg-rose-200 hover:bg-rose-300 font-semibold py-2 px-6 rounded-lg text-md';
-                noButton.dataset.group = `family-q-${index}`;
-                noButton.dataset.answer = 'no';
-                noButton.onclick = () => selectFamilyQuizOption(noButton);
-                optionsDiv.appendChild(noButton);
-
-                questionDiv.appendChild(optionsDiv);
-                familyQuizContainer.appendChild(questionDiv);
-            });
-
-            const checkBtn = document.getElementById('family-quiz-check-btn');
-            if(checkBtn){
-                checkBtn.onclick = checkFamilyQuiz;
-            }
-        }
-
-        function selectFamilyQuizOption(selectedButton) {
-            const groupName = selectedButton.dataset.group;
-            const buttonsInGroup = document.querySelectorAll(`button[data-group="${groupName}"]`);
-            
-            buttonsInGroup.forEach(btn => {
-                btn.classList.remove('bg-emerald-500', 'text-white', 'bg-rose-500');
-                btn.dataset.selected = 'false';
-                // Reset to default colors
-                if(btn.dataset.answer === 'yes') {
-                    btn.classList.add('bg-emerald-200', 'hover:bg-emerald-300');
-                } else {
-                    btn.classList.add('bg-rose-200', 'hover:bg-rose-300');
-                }
-            });
-
-            selectedButton.dataset.selected = 'true';
-            // Set selected color
-            if(selectedButton.dataset.answer === 'yes') {
-                selectedButton.classList.add('bg-emerald-500', 'text-white');
-                selectedButton.classList.remove('bg-emerald-200', 'hover:bg-emerald-300');
-            } else {
-                selectedButton.classList.add('bg-rose-500', 'text-white');
-                selectedButton.classList.remove('bg-rose-200', 'hover:bg-rose-300');
-            }
-        }
-
-        function checkFamilyQuiz() {
-            const feedbackEl = document.getElementById('family-quiz-feedback');
-            if (!feedbackEl) return;
-
-            let allCorrect = true;
-            let correctCount = 0;
-            const totalQuestions = familyQuizData.length;
-
-            familyQuizData.forEach((item, index) => {
-                const groupName = `family-q-${index}`;
-                const buttonsInGroup = document.querySelectorAll(`button[data-group="${groupName}"]`);
-                const selectedButton = document.querySelector(`button[data-group="${groupName}"][data-selected="true"]`);
-                
-                buttonsInGroup.forEach(btn => btn.classList.remove('correct', 'incorrect'));
-
-                if (selectedButton) {
-                    const userAnswer = selectedButton.dataset.answer;
-                    if (userAnswer === item.answer) {
-                        selectedButton.classList.add('correct');
-                        correctCount++;
-                    } else {
-                        selectedButton.classList.add('incorrect');
-                        allCorrect = false;
-                        // Show correct answer
-                        buttonsInGroup.forEach(btn => {
-                            if (btn.dataset.answer === item.answer) {
-                                btn.classList.add('correct');
-                            }
-                        });
-                    }
-                } else {
-                    allCorrect = false;
-                }
-            });
-
-            if (allCorrect) {
-                feedbackEl.textContent = `Excellent! All ${totalQuestions} correct!`;
-                feedbackEl.style.color = '#10B981';
-            } else {
-                feedbackEl.textContent = `You got ${correctCount} out of ${totalQuestions}. Check the answers!`;
-                feedbackEl.style.color = '#EF4444';
-            }
-        }
-
+        // Removed the interactive quiz JavaScript
 
         // --- Look and Complete the Words. Match! Activity ---
         const lookCompleteWordAnswers = {
@@ -1640,7 +1508,7 @@
             initializeWordMatchGame();
             initializeStoryQuiz();
             initializeLookAndComplete(); // Initialize the new activity
-            initializeFamilyQuiz(); // Initialize the new family quiz
+            // initializeFamilyQuiz(); // Removed call for family quiz
         });
         
         // Ensure initialization runs even if DOMContentLoaded already fired
@@ -1650,7 +1518,7 @@
         initializeWordMatchGame();
         initializeStoryQuiz();
         initializeLookAndComplete();
-        initializeFamilyQuiz(); // Initialize the new family quiz
+        // initializeFamilyQuiz(); // Removed call for family quiz
 
 
     </script>

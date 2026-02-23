@@ -73,6 +73,1836 @@
         .draggable-name.dragging {
             opacity: 0.5;
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .drop-zone {
+            background-color: #f1f5f9; /* slate-100 */
+            border: 3px dashed #cbd5e1; /* slate-300 */
+            border-radius: 1rem;
+            padding: 1rem;
+            min-height: 200px;
+            transition: background-color 0.3s;
+        }
+        .drop-zone.drag-over {
+            background-color: #dbeafe; /* blue-200 */
+            border-color: #60a5fa; /* blue-400 */
+        }
+        .correctly-placed {
+             background-color: #d1fae5 !important; /* emerald-200 */
+             border-color: #34d399 !important; /* emerald-400 */
+             cursor: not-allowed;
+        }
+        .incorrect-drop {
+            animation: shake 0.5s;
+        }
+
+        /* Styles for button-based games */
+        .option-button {
+            transition: all 0.2s ease-in-out;
+        }
+        .option-button:hover {
+            transform: scale(1.05);
+        }
+        .correct {
+            background-color: #34D399 !important; /* Emerald 400 */
+            color: white !important;
+            animation: bounce 0.5s;
+        }
+        .incorrect {
+            background-color: #F87171 !important; /* Red 400 */
+            color: white !important;
+            animation: shake 0.5s;
+        }
+        
+        /* Styles for input-based games */
+        .name-input {
+             border: 2px solid #cbd5e1;
+             border-radius: 0.5rem;
+             padding: 0.5rem;
+             transition: border-color 0.3s;
+        }
+        .name-input.correct-input {
+            border-color: #34D399; /* Emerald 400 */
+            background-color: #f0fdf4; /* Emerald 50 */
+        }
+         .name-input.incorrect-input {
+            border-color: #F87171; /* Red 400 */
+            background-color: #fef2f2; /* Red 50 */
+        }
+        
+        /* For prepositions activity */
+        .preposition-input {
+            border: 2px solid #cbd5e1;
+            border-radius: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            font-size: 1rem;
+            text-align: center;
+            width: 120px; /* Adjust as needed */
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+        .preposition-input.correct-input {
+            border-color: #34D399; /* Emerald 400 */
+            background-color: #f0fdf4; /* Emerald 50 */
+        }
+        .preposition-input.incorrect-input {
+            border-color: #F87171; /* Red 400 */
+            background-color: #fef2f2; /* Red 50 */
+        }
+
+        /* For Look and Complete activity */
+        .complete-input {
+            border: 2px solid #cbd5e1;
+            border-radius: 0.375rem; /* rounded-md */
+            padding: 0.25rem 0.5rem;
+            width: 100px; /* or adjust as needed */
+            text-align: center;
+            font-size: 1rem;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+        .complete-input.correct-input {
+            border-color: #34D399; /* Emerald 400 */
+            background-color: #f0fdf4; /* Emerald 50 */
+        }
+        .complete-input.incorrect-input {
+            border-color: #F87171; /* Red 400 */
+            background-color: #fef2f2; /* Red 50 */
+        }
+        .draggable-match-item {
+            padding: 0.5rem 1rem;
+            background-color: #fee2e2; /* Red 100 */
+            color: #991b1b; /* Red 800 */
+            border: 2px solid #fca5a5; /* Red 300 */
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: grab;
+            transition: all 0.2s ease-in-out;
+            text-align: center;
+        }
+        .draggable-match-item.dragging {
+            opacity: 0.5;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .match-drop-zone {
+            background-color: #f1f5f9; /* slate-100 */
+            border: 3px dashed #cbd5e1; /* slate-300 */
+            border-radius: 1rem;
+            padding: 1rem;
+            min-height: 50px; /* Smaller height for single items */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        .match-drop-zone.drag-over {
+            background-color: #dbeafe; /* blue-200 */
+            border-color: #60a5fa; /* blue-400 */
+        }
+        .match-drop-zone.correctly-placed {
+            background-color: #d1fae5 !important; /* emerald-200 */
+            border-color: #34d399 !important; /* emerald-400 */
+        }
+
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header --><header class="bg-amber-400 p-6 text-center text-white rounded-b-3xl shadow-lg">
+        <h1 class="text-4xl md:text-6xl title-font">Get ready for starters</h1>
+        <p class="mt-2 text-lg">Let's learn English together!</p>
+    </header>
+
+    <!-- Navigation --><nav class="p-6 flex flex-wrap justify-center gap-3 md:gap-4">
+        <button onclick="showSection('hello')" class="nav-button active bg-sky-400 hover:bg-sky-500 text-white font-bold py-3 px-6 rounded-full text-lg">👋 Hello!</button>
+        <button onclick="showSection('animals')" class="nav-button bg-rose-400 hover:bg-rose-500 text-white font-bold py-3 px-6 rounded-full text-lg">① I love animals!</button>
+        <button onclick="showSection('home')" class="nav-button bg-violet-400 hover:bg-violet-500 text-white font-bold py-3 px-6 rounded-full text-lg">② At home</button>
+        <button onclick="showSection('family')" class="nav-button bg-emerald-400 hover:bg-emerald-500 text-white font-bold py-3 px-6 rounded-full text-lg">③ Family and friends</button>
+        <button onclick="showSection('food')" class="nav-button bg-orange-400 hover:bg-orange-500 text-white font-bold py-3 px-6 rounded-full text-lg">④ Food!</button>
+        <button onclick="showSection('clothes')" class="nav-button bg-teal-400 hover:bg-teal-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑤ I like clothes</button>
+        <button onclick="showSection('revision1')" class="nav-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full text-lg">Revision 1</button>
+        <button onclick="showSection('look')" class="nav-button bg-sky-400 hover:bg-sky-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑥ Look at us!</button>
+        <button onclick="showSection('school')" class="nav-button bg-rose-400 hover:bg-rose-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑦ We love school!</button>
+        <button onclick="showSection('playground')" class="nav-button bg-violet-400 hover:bg-violet-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑧ In the playground</button>
+        <button onclick="showSection('hobbies')" class="nav-button bg-emerald-400 hover:bg-emerald-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑨ My hobbies</button>
+        <button onclick="showSection('day')" class="nav-button bg-orange-400 hover:bg-orange-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑩ Your day</button>
+        <button onclick="showSection('revision2')" class="nav-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full text-lg">Revision 2</button>
+        <button onclick="showSection('street')" class="nav-button bg-teal-400 hover:bg-teal-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑪ In the street</button>
+        <button onclick="showSection('grandparents')" class="nav-button bg-sky-400 hover:bg-sky-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑫ My grandparents</button>
+        <button onclick="showSection('zoo')" class="nav-button bg-rose-400 hover:bg-rose-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑬ Going to the zoo</button>
+        <button onclick="showSection('birthday')" class="nav-button bg-violet-400 hover:bg-violet-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑭ Happy birthday!</button>
+        <button onclick="showSection('beach')" class="nav-button bg-emerald-400 hover:bg-emerald-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑮ At the beach</button>
+        <button onclick="showSection('revision3')" class="nav-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full text-lg">Revision 3</button>
+        <button onclick="showSection('wordlist')" class="nav-button bg-orange-400 hover:bg-orange-500 text-white font-bold py-3 px-6 rounded-full text-lg">Wordlist</button>
+    </nav>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- Hello! Section --><section id="hello" class="content-section active">
+            <div class="space-y-8">
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Hello!</h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/hello/hello.JPG" alt="Children waving hello" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Introductions</h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/hello/ex_1_and_2.JPG" alt="Listen and Point Activity" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Which monster is which</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/hello/monsters_2.png" alt="Monster colours activity" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://wordwall.net/resource/99875192" target="_blank" rel="noopener noreferrer" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">What's your name?</h2>
+                    <div class="flex flex-col items-center gap-6">
+                        <img src="https://johanka2014.github.io/get_ready_for_starters/hello/names_1.png" alt="What's your name activity" class="rounded-2xl shadow-md w-full max-w-2xl">
+                        <p class="text-lg text-gray-600">Listen and say.</p>
+                        <audio controls src="https://johanka2014.github.io/get_ready_for_starters/hello/2d.mp3" class="w-full max-w-md">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">What are their names?</h2>
+                    <div class="max-w-xl mx-auto text-center">
+                        <img src="https://johanka2014.github.io/get_ready_for_starters/hello/names_2.jpg" alt="Children for the name game" class="rounded-2xl shadow-md w-full mb-6">
+                        <div id="written-names-game" class="space-y-4 text-lg text-left max-w-sm mx-auto">
+                            <!-- JS will populate this --></div>
+                        <div class="mt-6">
+                             <button onclick="checkWrittenNames()" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg">Check Answers</button>
+                        </div>
+                        <div id="written-names-feedback" class="mt-4 text-center text-2xl font-bold h-8"></div>
+                    </div>
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Boy or Girl?</h2>
+                    <p class="text-center text-gray-500 mb-4">Drag the names to the correct box.</p>
+                    <div id="name-bank" class="name-bank">
+                        <!-- Names will be generated by JS --></div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/hello/boy.png" onerror="this.onerror=null;this.src='https://placehold.co/100x150/a5f3fc/083344?text=Boy';" alt="Boy icon" class="mx-auto mb-2 rounded-lg w-[100px] h-[150px] object-cover">
+                            <div id="boy-zone" class="drop-zone space-y-2" data-category="boy"></div>
+                        </div>
+                        <div class="text-center">
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/hello/girl.png" onerror="this.onerror=null;this.src='https://placehold.co/100x150/f9a8d4/500724?text=Girl';" alt="Girl icon" class="mx-auto mb-2 rounded-lg w-[100px] h-[150px] object-cover">
+                            <div id="girl-zone" class="drop-zone space-y-2" data-category="girl"></div>
+                        </div>
+                         <div class="text-center">
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/hello/girl_and_boy.png" onerror="this.onerror=null;this.src='https://placehold.co/150x150/d8b4fe/3b0764?text=Boy+%26+Girl';" alt="Boy and Girl icon" class="mx-auto mb-2 rounded-lg w-[150px] h-[150px] object-cover">
+                            <div id="both-zone" class="drop-zone space-y-2" data-category="both"></div>
+                        </div>
+                    </div>
+                     <div class="text-center mt-6">
+                        <button id="reset-names-btn" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg">Play Again</button>
+                    </div>
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Listen and Choose</h2>
+                    <div class="flex flex-col items-center gap-6">
+                        <p class="text-lg text-gray-600">Listen to the audio and click on the names you hear.</p>
+                        <audio controls src="https://johanka2014.github.io/get_ready_for_starters/hello/3c.mp3" class="w-full max-w-md">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <div id="listen-choose-game" class="mt-4 text-center">
+                             <div id="listen-choose-options" class="flex flex-wrap justify-center gap-4">
+                                <!-- JS will populate this --></div>
+                             <div id="listen-choose-feedback" class="mt-4 text-center text-xl font-semibold h-8"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Numbers</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/hello/numbers_wordwall.png" alt="Numbers wordwall activity" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://wordwall.net/resource/74632327" target="_blank" rel="noopener noreferrer" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Match the Words</h2>
+                    <div id="word-match-game" class="text-center">
+                        <img id="word-match-image" src="" alt="Match the word" class="rounded-2xl shadow-md w-full max-w-sm mx-auto h-48 object-contain mb-6 bg-gray-100 p-2">
+                        <div id="word-match-options" class="flex flex-wrap justify-center gap-4">
+                            <!-- Options will be generated by JS --></div>
+                        <div id="word-match-feedback" class="mt-6 text-2xl font-bold h-10"></div>
+                        <button id="word-match-next-btn" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg hidden">Next</button>
+                    </div>
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">How Many?</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/hello/how_many_pg_1.JPG" alt="How many activity" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://wordwall.net/resource/100022746" target="_blank" rel="noopener noreferrer" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Colours Practice</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/hello/colours_2.png" alt="Colours activity" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://wordwall.net/resource/100024284" target="_blank" rel="noopener noreferrer" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Adding more colours</h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/hello/colours_3.png" alt="Colours Practice Sheet" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">More Colours Practice</h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/hello/colours_4.png" alt="More Colours Practice Sheet" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">More Colours Practice</h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/hello/colours_5.png" alt="Final Colours Practice Sheet" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Colours Listening</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div class="flex flex-col items-center gap-4">
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/hello/colours_6.png" alt="Colours listening activity" class="rounded-2xl shadow-md w-full">
+                            <audio controls src="https://johanka2014.github.io/get_ready_for_starters/mod_4/16%2016%20Pista%2016.mp3" class="w-full max-w-md">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://wordwall.net/resource/100086228" target="_blank" rel="noopener noreferrer" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-sky-400">
+                    <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Final Colours practice</h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/hello/colours_7.png" alt="Colours Song Sheet" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+
+        <!-- Other Sections ... --><section id="animals" class="content-section">
+            <div class="activity-card border-rose-400">
+                <h2 class="text-3xl font-bold text-center text-rose-600 mb-6">I love animals!</h2>
+                <img src="https://placehold.co/800x400/f43f5e/FFFFFF?text=Animal+Games" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Games and songs about animals can be added here.</p>
+            </div>
+            <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+
+        <section id="home" class="content-section">
+            <div class="space-y-8">
+                <div class="activity-card border-violet-400">
+                    <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">At home</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="http://johanka2014.github.io/get_ready_for_starters/mod_2/1.png" alt="At home vocabulary" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://wordwall.net/resource/101105033" target="_blank" rel="noopener noreferrer" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                 <div class="activity-card border-violet-400">
+                    <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">Look and Complete the Words. Match!</h2>
+                    <p class="text-center text-gray-600 mb-4">Complete the words on the left, then drag them to match the room on the right.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        <!-- Left Column: Items with fill-in-the-blanks --><div class="space-y-6">
+                            <div id="item-container-1" class="flex items-center gap-4">
+                                <span class="font-bold text-xl">1</span>
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/vocab_quiz_1.png" alt="Flowers" class="w-20 h-20 object-contain rounded-lg shadow-sm bg-gray-50 p-1">
+                                <p class="text-lg">f<input type="text" id="complete-input-1a" class="complete-input w-12 mx-1">o<input type="text" id="complete-input-1b" class="complete-input w-12 mx-1">e<input type="text" id="complete-input-1c" class="complete-input w-12 mx-1">s</p>
+                                <div id="match-item-1" class="draggable-match-item" draggable="true" data-match-id="flowers">Flowers</div>
+                            </div>
+                            <div id="item-container-2" class="flex items-center gap-4">
+                                <span class="font-bold text-xl">2</span>
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/vocab_quiz_2.png" alt="Picture of fruit" class="w-20 h-20 object-contain rounded-lg shadow-sm bg-gray-50 p-1">
+                                <p class="text-lg">p<input type="text" id="complete-input-2a" class="complete-input w-12 mx-1">c<input type="text" id="complete-input-2b" class="complete-input w-12 mx-1">u<input type="text" id="complete-input-2c" class="complete-input w-12 mx-1">e</p>
+                                <div id="match-item-2" class="draggable-match-item" draggable="true" data-match-id="picture">Picture</div>
+                            </div>
+                            <div id="item-container-3" class="flex items-center gap-4">
+                                <span class="font-bold text-xl">3</span>
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/vocab_quiz_3.png" alt="Table" class="w-20 h-20 object-contain rounded-lg shadow-sm bg-gray-50 p-1">
+                                <p class="text-lg">d<input type="text" id="complete-input-3a" class="complete-input w-12 mx-1">e<input type="text" id="complete-input-3b" class="complete-input w-12 mx-1">k</p>
+                                <div id="match-item-3" class="draggable-match-item" draggable="true" data-match-id="desk">Desk</div>
+                            </div>
+                            <div id="item-container-4" class="flex items-center gap-4">
+                                <span class="font-bold text-xl">4</span>
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/vocab_quiz_4.png" alt="Radio" class="w-20 h-20 object-contain rounded-lg shadow-sm bg-gray-50 p-1">
+                                <p class="text-lg">r<input type="text" id="complete-input-4a" class="complete-input w-12 mx-1">d<input type="text" id="complete-input-4b" class="complete-input w-12 mx-1">o</p>
+                                <div id="match-item-4" class="draggable-match-item" draggable="true" data-match-id="radio">Radio</div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Rooms with drop zones --><div class="space-y-6">
+                            <div class="flex items-center gap-4">
+                                <span class="font-bold text-xl">a</span>
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/vocab_quiz_a.png" alt="Dining room" class="w-20 h-20 object-contain rounded-lg shadow-sm bg-gray-50 p-1">
+                                <p class="text-lg">d<input type="text" id="complete-input-a1" class="complete-input w-12 mx-1">n<input type="text" id="complete-input-a2" class="complete-input w-12 mx-1">n<input type="text" id="complete-input-a3" class="complete-input w-12 mx-1">g r<input type="text" id="complete-input-a4" class="complete-input w-12 mx-1">o<input type="text" id="complete-input-a5" class="complete-input w-12 mx-1">m</p>
+                                <div id="match-zone-a" class="match-drop-zone w-32" data-correct-item="desk"></div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="font-bold text-xl">b</span>
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/vocab_quiz_b.png" alt="Living room" class="w-20 h-20 object-contain rounded-lg shadow-sm bg-gray-50 p-1">
+                                <p class="text-lg">l<input type="text" id="complete-input-b1" class="complete-input w-12 mx-1">v<input type="text" id="complete-input-b2" class="complete-input w-12 mx-1">n<input type="text" id="complete-input-b3" class="complete-input w-12 mx-1">g r<input type="text" id="complete-input-b4" class="complete-input w-12 mx-1">o<input type="text" id="complete-input-b5" class="complete-input w-12 mx-1">m</p>
+                                <div id="match-zone-b" class="match-drop-zone w-32" data-correct-item="picture"></div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="font-bold text-xl">c</span>
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/vocab_quiz_c.png" alt="Garden" class="w-20 h-20 object-contain rounded-lg shadow-sm bg-gray-50 p-1">
+                                <p class="text-lg">g<input type="text" id="complete-input-c1" class="complete-input w-12 mx-1">r<input type="text" id="complete-input-c2" class="complete-input w-12 mx-1">d<input type="text" id="complete-input-c3" class="complete-input w-12 mx-1">n</p>
+                                <div id="match-zone-c" class="match-drop-zone w-32" data-correct-item="flowers"></div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="font-bold text-xl">d</span>
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/vocab_quiz_d.png" alt="Kitchen" class="w-20 h-20 object-contain rounded-lg shadow-sm bg-gray-50 p-1">
+                                <p class="text-lg">k<input type="text" id="complete-input-d1" class="complete-input w-12 mx-1">t<input type="text" id="complete-input-d2" class="complete-input w-12 mx-1">h<input type="text" id="complete-input-d3" class="complete-input w-12 mx-1">n</p>
+                                <div id="match-zone-d" class="match-drop-zone w-32" data-correct-item="radio"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-8">
+                        <button onclick="checkLookAndComplete()" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 px-6 rounded-full text-lg">Check Answers</button>
+                        <button onclick="resetLookAndComplete()" class="nav-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full text-lg ml-4">Reset</button>
+                    </div>
+                    <div id="look-complete-feedback" class="mt-4 text-center text-xl font-bold h-8"></div>
+                </div>
+
+                <div class="activity-card border-violet-400">
+                    <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">Rooms in the House</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="http://johanka2014.github.io/get_ready_for_starters/mod_2/2.png" alt="Rooms in the house activity" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://wordwall.net/resource/90982911" target="_blank" rel="noopener noreferrer" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-violet-400">
+                    <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">Where is it?</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="http://johanka2014.github.io/get_ready_for_starters/mod_2/3.png" alt="Where is it? activity" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://wordwall.net/resource/90982911" target="_blank" rel="noopener noreferrer" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-violet-400">
+                    <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">Where's Sam's cat?</h2>
+                    <div class="flex flex-col items-center gap-6">
+                        <p class="text-lg text-gray-600 mb-4">Look at the pictures and type the correct preposition.</p>
+                        <div class="grid grid-cols-2 gap-8 items-start max-w-2xl w-full">
+                            <div class="text-center">
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/cat_by_door.png" alt="Cat by the door" class="rounded-lg shadow-md w-full mb-2">
+                                <p class="text-lg">1. It's <input type="text" id="preposition-1" class="preposition-input"> the door.</p>
+                            </div>
+                            <div class="text-center">
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/cat_under_bed.png" alt="Cat under the bed" class="rounded-lg shadow-md w-full mb-2">
+                                <p class="text-lg">2. It's <input type="text" id="preposition-2" class="preposition-input"> the bed.</p>
+                            </div>
+                            <div class="text-center">
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/cat_behind_sofa.png" alt="Cat behind the sofa" class="rounded-lg shadow-md w-full mb-2">
+                                <p class="text-lg">3. It's <input type="text" id="preposition-3" class="preposition-input"> the sofa.</p>
+                            </div>
+                            <div class="text-center">
+                                <img src="https://johanka2014.github.io/get_ready_for_starters/mod_2/cat_between_dogs.png" alt="Cat between the dogs" class="rounded-lg shadow-md w-full mb-2">
+                                <p class="text-lg">4. It's <input type="text" id="preposition-4" class="preposition-input"> the dogs.</p>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <button onclick="checkPrepositions()" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 px-6 rounded-full text-lg">Check Answers</button>
+
+                        </div>
+                        <div id="preposition-feedback" class="mt-4 text-center text-xl font-bold h-8"></div>
+                    </div>
+                </div>
+                <div class="activity-card border-violet-400">
+                    <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">Vocabulary Practice</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="http://johanka2014.github.io/get_ready_for_starters/mod_2/4.png" alt="Prepositions practice activity" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://learningapps.org/display?v=ptcoc76wn21" target="_blank" rel="noopener noreferrer" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-violet-400">
+                    <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">In the House Song</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="http://johanka2014.github.io/get_ready_for_starters/mod_2/5.jpg" alt="In the House Song" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center space-y-4">
+                            <p class="text-xl mb-2 text-gray-600">Click a button to play!</p>
+                            <a href="https://wordwall.net/resource/101106418" target="_blank" rel="noopener noreferrer" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                            <a href="https://youtu.be/VqW_NLnkUpA?si=D_97ev8iaJNNO4IS" target="_blank" rel="noopener noreferrer" class="nav-button bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Watch Song (YouTube)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-violet-400">
+                    <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">Phone Story Quiz</h2>
+                    <img src="http://johanka2014.github.io/get_ready_for_starters/mod_2/phone_story.JPG" alt="Phone Story" class="rounded-2xl shadow-md w-full max-w-2xl mx-auto mb-6">
+                    
+                    <div id="story-quiz-container" class="max-w-xl mx-auto space-y-6">
+                        <!-- Questions will be injected by JS --></div>
+                    
+                    <div class="text-center mt-6">
+                        <button id="story-quiz-check-btn" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 px-6 rounded-full text-lg">Check Answers</button>
+                    </div>
+                    <div id="story-quiz-feedback" class="mt-4 text-center text-xl font-bold h-8"></div>
+                </div>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="family" class="content-section">
+            <div class="space-y-8">
+                <div class="activity-card border-emerald-400">
+                    <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">Family Members</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/mod_3/14.jpg" alt="Family members activity" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://wordwall.net/resource/101682306" target="_blank" rel="noopener noreferrer" class="nav-button bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-emerald-400">
+                    <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">Family Words</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/mod_3/15.jpg" alt="Family words activity" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://wordwall.net/resource/101683216" target="_blank" rel="noopener noreferrer" class="nav-button bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-emerald-400">
+                    <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">Family Picture</h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_3/4.jpg" alt="Family picture" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+                <div class="activity-card border-emerald-400">
+                    <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">Family Reading</h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_3/24.png" alt="Family reading practice" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+                <div class="activity-card border-emerald-400">
+                    <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">Family Practice</h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_3/25.png" alt="Family practice" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+                <div class="activity-card border-emerald-400">
+                    <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">Vocabulary Practice</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/mod_3/26.png" alt="Family listening activity" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://wordwall.net/resource/101921505" target="_blank" rel="noopener noreferrer" class="nav-button bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-emerald-400">
+                    <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">Who is in the picture?</h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_3/27.png" alt="Family yes/no quiz" class="rounded-2xl shadow-md w-full max-w-2xl mx-auto mb-6">
+                    
+                </div>
+                <div class="activity-card border-emerald-400">
+                    <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">Family Writing Practice</h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_3/19.jpg" alt="Family writing practice" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+                <div class="activity-card border-emerald-400">
+                    <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">Family Reading and Matching</h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_3/20.jpg" alt="Family reading and matching practice" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+                <div class="activity-card border-emerald-400">
+                    <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">Reading and writing part 5</h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_3/28.png" alt="Family song" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+                <div class="activity-card border-emerald-400">
+                    <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">Family Writing</h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_3/29.png" alt="Family writing" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+                <div class="activity-card border-emerald-400">
+                    <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">Story Time</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/mod_3/30.png" alt="Story time" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center flex flex-col gap-4 items-center justify-center">
+                            <p class="text-xl mb-2 text-gray-600">Click a button to open!</p>
+                            <a href="https://wordwall.net/resource/102833701" target="_blank" rel="noopener noreferrer" class="nav-button bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block w-full max-w-xs">
+                                Open Activity
+                            </a>
+                            <a href="https://online.flipbuilder.com/sdtta/uqtx/mobile/index.html#p=25" target="_blank" rel="noopener noreferrer" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block w-full max-w-xs">
+                                Audio
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-emerald-400">
+                    <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">Family Story Practice</h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_3/31.png" alt="Family story practice" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+                <div class="activity-card border-emerald-400">
+                    <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">Family Story Writing</h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_3/32.png" alt="Family story writing" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+
+        <section id="food" class="content-section">
+            <div class="space-y-8">
+                <div class="activity-card border-orange-400">
+                    <h2 class="text-3xl font-bold text-center text-orange-600 mb-6">Food Vocabulary</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/mod_4/food_1.JPG" alt="Food vocabulary" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://wordwall.net/resource/102834217" target="_blank" rel="noopener noreferrer" class="nav-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-orange-400">
+                    <h2 class="text-3xl font-bold text-center text-orange-600 mb-6">Food Quiz</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/mod_4/1.png" alt="More food vocabulary" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://wordwall.net/resource/69500616" target="_blank" rel="noopener noreferrer" class="nav-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-orange-400">
+                    <h2 class="text-3xl font-bold text-center text-orange-600 mb-6">Food Spelling</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/mod_4/2.png" alt="Fruit and vegetables vocabulary" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://wordwall.net/resource/60137530" target="_blank" rel="noopener noreferrer" class="nav-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-orange-400">
+                    <h2 class="text-3xl font-bold text-center text-orange-600 mb-6">Question Practice</h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_4/6.jpg" alt="Food vocabulary 3" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+                <div class="activity-card border-orange-400">
+                    <h2 class="text-3xl font-bold text-center text-orange-600 mb-6">Story Time</h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_4/7.jpg" alt="Food vocabulary 4" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+                <div class="activity-card border-orange-400">
+                    <h2 class="text-3xl font-bold text-center text-orange-600 mb-6">Comprehension Questions</h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_4/8.jpg" alt="Food vocabulary 5" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+                <div class="activity-card border-orange-400">
+                    <h2 class="text-3xl font-bold text-center text-orange-600 mb-6">Food Listening</h2>
+                    <div class="flex flex-col items-center gap-6">
+                        <img src="https://johanka2014.github.io/get_ready_for_starters/mod_4/9.jpg" alt="Food listening activity" class="rounded-2xl shadow-md w-full max-w-2xl">
+                        <audio controls src="https://johanka2014.github.io/get_ready_for_starters/mod_4/16%2016%20Pista%2016.mp3" class="w-full max-w-md">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+                <div class="activity-card border-orange-400">
+                    <h2 class="text-3xl font-bold text-center text-orange-600 mb-6"></h2>
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_4/find_differences.JPG" alt="Find the differences" class="rounded-2xl shadow-md w-full mx-auto">
+                </div>
+                <div class="activity-card border-orange-400">
+                    <h2 class="text-3xl font-bold text-center text-orange-600 mb-6">Food Anagrams</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/mod_4/4.png" alt="Food vocabulary" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://wordwall.net/resource/102839304" target="_blank" rel="noopener noreferrer" class="nav-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-orange-400">
+                    <h2 class="text-3xl font-bold text-center text-orange-600 mb-6">Listening Practice Test</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/mod_4/9.png" alt="Food story" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center flex flex-col gap-4 items-center justify-center">
+                            <p class="text-xl mb-2 text-gray-600">Click a button to open!</p>
+                            <a href="https://wordwall.net/resource/102851854" target="_blank" rel="noopener noreferrer" class="nav-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block w-full max-w-xs">
+                                Open Activity
+                            </a>
+                            <a href="https://online.flipbuilder.com/sdtta/uqtx/mobile/index.html#p=30" target="_blank" rel="noopener noreferrer" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block w-full max-w-xs">
+                                Audio
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card border-orange-400">
+                    <h2 class="text-3xl font-bold text-center text-orange-600 mb-6">Find the food in the image</h2>
+                     <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/mod_4/10.png" alt="Breakfast" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Click the button to open the activity!</p>
+                            <a href="https://wordwall.net/resource/17411425" target="_blank" rel="noopener noreferrer" class="nav-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Open Activity
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="clothes" class="content-section">
+            <div class="space-y-8"> <!--this line of code creates a gap between cards-->
+          <div class="activity-card border-teal-400">
+                    <h2 class="text-3xl font-bold text-center text-teal-600 mb-6">Clothing words</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/mod_5/vocab.png" alt="Clothing words" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Play a game to match the words to the pictures!</p>
+                            <a href="https://learningapps.org/watch?v=piespqenn22" target="_blank" rel="noopener noreferrer" class="nav-button bg-teal-500 hover:bg-teal-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Play on LearningApps!
+                            </a>
+                        </div>
+                    </div>   
+            </div>
+            
+            <div class="activity-card border-teal-400">
+                    <h2 class="text-3xl font-bold text-center text-teal-600 mb-6">Crossword</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/mod_5/crossword.png" alt="Crossword" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Play a game to test your spelling!</p>
+                            <a href="https://wordwall.net/resource/98515925" target="_blank" rel="noopener noreferrer" class="nav-button bg-teal-500 hover:bg-teal-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Play on Wordwall!
+                            </a>
+                        </div>
+                    </div> 
+                </div> 
+                <div class="activity-card border-teal-400">
+                    <h2 class="text-3xl font-bold text-center text-teal-600 mb-6">Speaking practice</h2>
+                    <div class="flex justify-center">
+                        <img src="https://johanka2014.github.io/get_ready_for_starters/mod_5/1.png" alt="Speaking practice" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                </div> 
+                <div class="activity-card border-teal-400">
+                    <h2 class="text-3xl font-bold text-center text-teal-600 mb-6">Where are the clothes?</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/mod_5/2.png" alt="Where are the clothes?" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Put the clothes in the right place!</p>
+                            <a href="https://wordwall.net/resource/102156321" target="_blank" rel="noopener noreferrer" class="nav-button bg-teal-500 hover:bg-teal-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Play on Wordwall!
+                            </a>
+                        </div>
+                    </div> 
+                </div>
+                <div class="activity-card border-teal-400">
+                    <h2 class="text-3xl font-bold text-center text-teal-600 mb-6">Revision Crossword</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/mod_5/crossword_2.png" alt="Revision Crossword" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Play a game to match the words to the pictures!</p>
+                            <a href="https://learningapps.org/view44072982" target="_blank" rel="noopener noreferrer" class="nav-button bg-teal-500 hover:bg-teal-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Play on LearningApps!
+                            </a>
+                        </div>
+                    </div>   
+            </div>
+            
+            <div class="activity-card border-teal-400">
+                    <h2 class="text-3xl font-bold text-center text-teal-600 mb-6">Group Sort</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/mod_5/group.png" alt="Group sort" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-600">Put the clothes in the right place!</p>
+                            <a href="https://wordwall.net/resource/103800538" target="_blank" rel="noopener noreferrer" class="nav-button bg-teal-500 hover:bg-teal-600 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Play on Wordwall!
+                            </a>
+                        </div>
+                    </div> 
+                </div>
+
+                <div class="activity-card border-teal-400">
+                    <h2 class="text-3xl font-bold text-center text-teal-600 mb-6">Story</h2>
+
+                    <div class="flex justify-center">
+                        <img src="https://johanka2014.github.io/get_ready_for_starters/mod_5/story.png" alt="Story" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                </div>
+                <div class="activity-card border-cyan-400">
+                    <h2 class="text-3xl font-bold text-center text-cyan-600 mb-6">What is Sam wearing?</h2>
+                    <div class="flex flex-col items-center gap-6">
+                        <img src="https://johanka2014.github.io/get_ready_for_starters/mod_5/3.jpg" alt="My Room Song" class="rounded-2xl shadow-md w-full max-w-2xl">
+                        <p class="text-lg text-center text-gray-600">Audio file!</p>
+                        <audio controls src="https://johanka2014.github.io/get_ready_for_starters/mod_5/20 20 Pista 20.mp3" class="w-full max-w-md">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+                
+                <div class="activity-card border-teal-400">
+                    <h2 class="text-3xl font-bold text-center text-teal-600 mb-6">Practice Test Reading</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/mod_5/4.JPG" alt="Clothing words" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/mod_5/5.JPG" alt="Clothing words" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        </div>
+                    </div>   
+                </div>
+
+                <div class="activity-card border-teal-400">
+            <h2 class="text-3xl font-bold text-center text-teal-600 mb-8">Practice Test Listening</h2>
+            
+            <!-- Grid Container: two columns on medium screens and up, with 8-unit gap -->
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+                
+                <!-- START OF COLUMN 1: Now contains all the image and audio elements -->
+                <div>
+                    <!-- Corrected alt attribute: the 'Song' part was breaking the alt text in the original snippet -->
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_5/7.png" 
+                         alt="Clothing words for song" 
+                         class="rounded-2xl shadow-md w-full mb-4">
+                    
+                    <p class="text-lg text-gray-600 mb-2">Audio file:</p>
+                    
+                    <!-- The audio element is now correctly nested within Column 1 -->
+                    <audio controls 
+                           src="https://johanka2014.github.io/get_ready_for_starters/mod_5/21 21 Pista 21.mp3" 
+                           class="w-full max-w-md">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div> 
+                <!-- END OF COLUMN 1 -->
+
+                <!-- START OF COLUMN 2: Contains the second image, centered -->
+                <div class="text-center">
+                    <div>
+                        <img src="https://johanka2014.github.io/get_ready_for_starters/mod_5/8.png" 
+                             alt="Clothing words practice image" 
+                             class="rounded-2xl shadow-md w-full">
+                    </div>
+                </div>
+                <!-- END OF COLUMN 2 -->
+                
+            </div>
+        </div> 
+        <div class="activity-card border-teal-400">
+            
+                    <h2 class="text-3xl font-bold text-center text-teal-600 mb-6">What do you see?</h2>
+
+                    <div class="flex justify-center">
+                        <img src="https://johanka2014.github.io/get_ready_for_starters/mod_5/9.jpg" alt="What do you see?" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                </div>
+
+                <div class="activity-card border-teal-400">
+                    <h2 class="text-3xl font-bold text-center text-teal-600 mb-6">Making sentences</h2>
+
+                    <div class="flex justify-center">
+                        <img src="https://johanka2014.github.io/get_ready_for_starters/mod_5/32.jpg" alt="Making sentences" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                </div>
+            
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+            </div>
+        </section>
+        
+        <section id="revision1" class="content-section">
+                        <div class="space-y-8"><!--this line of code creates a gap between cards-->
+<div class="activity-card border-gray-500">
+
+	<div class="flex justify-center">
+        
+                <img src="https://johanka2014.github.io/get_ready_for_starters/Revision_1/1.jpg" alt="What's in the picture?" class="rounded-2xl shadow-md w-full max-w-4xl">
+	</div>
+</div>
+
+<div class="activity-card border-grey-500">
+
+                    <div class="flex flex-col items-center gap-6">
+                        <img src="https://johanka2014.github.io/get_ready_for_starters/Revision_1/6.png" alt="What's in the bag?" class="rounded-2xl shadow-md w-full max-w-2xl">
+                        <p class="text-lg text-gray-600">Click play to listen</p>
+                        <audio controls src="https://johanka2014.github.io/get_ready_for_starters/Revision_1/22_Pista_22.avi" class="w-full max-w-md">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+
+<div class="activity-card border-gray-500">
+                    <h2 class="text-3xl font-bold text-center text-gray-500 mb-6">Match the words with the pictures</h2>
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <img src="https://johanka2014.github.io/get_ready_for_starters/Revision_1/4.jpg" alt="‘Match the words with the pictures" class="rounded-2xl shadow-md w-full">
+                        </div>
+                        <div class="text-center">
+                            <p class="text-xl mb-6 text-gray-500">Match the word halves</p>
+                            <a href="https://wordwall.net/resource/106913268" target="_blank" rel="noopener noreferrer" class="nav-button bg-pink-400 hover:bg-pink-400 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Play on Wordwall!
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity-card border-gray-500">
+                    <div class="flex justify-center">
+                        <img src="https://johanka2014.github.io/get_ready_for_starters/Revision_1/5.jpg" alt="put things away" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="https://johanka2014.github.io/get_ready_for_starters/Revision_1/9.png" alt="prepositions of place" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    </div>
+                </div>                
+
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+            </div>
+        </section>
+
+
+        <div class="space-y-8"><!--this line of code creates a gap between cards-->
+
+            <div class="activity-card border-sky-400">
+                <h2 class="text-3xl font-bold text-center text-sky-400 mb-6">Body Parts</h2>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <img src="https://johanka2014.github.io/get_ready_for_starters/mod_6/35.png" alt="Body Parts" class="rounded-2xl shadow-md w-full">
+                    </div>
+                    <div class="text-center">
+                        <p class="text-xl mb-6 text-gray-600">Match the word halves</p>
+                        <a href="https://wordwall.net/resource/106987335" target="_blank" rel="noopener noreferrer" class="nav-button bg-sky-400 hover:bg-sky-400 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                            Play on Wordwall!
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card border-sky-400">
+                <div class="flex justify-center">
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_6/3.jpg" alt="put things away" class="rounded-2xl shadow-md w-full max-w-4xl">
+                </div>
+                <div class="flex justify-center">
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_6/4.jpg" alt="prepositions of place" class="rounded-2xl shadow-md w-full max-w-4xl">
+                </div>
+                <div class="flex justify-center">
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_6/5.jpg" alt="prepositions of place" class="rounded-2xl shadow-md w-full max-w-4xl">
+                </div>
+            </div>
+
+            <div class="activity-card border-sky-400">
+
+                <div class="flex flex-col items-center gap-6">
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_6/6.jpg" alt="What's in the bag?" class="rounded-2xl shadow-md w-full max-w-2xl">
+                    <p class="text-lg text-gray-600">Click play to listen</p>
+                    <audio controls src="https://johanka2014.github.io/get_ready_for_starters/mod_6/Pista_24.mp3" class="w-full max-w-md">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <div class="flex justify-center">
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_6/36.png" alt="prepositions of place" class="rounded-2xl shadow-md w-full max-w-4xl">
+                </div>
+
+            </div>
+
+            <div class="activity-card border-sky-400">
+                <h2 class="text-3xl font-bold text-center text-sky-400 mb-6">Body Parts</h2>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <img src="https://johanka2014.github.io/get_ready_for_starters/mod_6/7.jpg" alt="Body Parts" class="rounded-2xl shadow-md w-full">
+                    </div>
+                    <div class="text-center">
+
+                        <a href="https://learningapps.org/watch?v=pbnpo9w0j26" target="_blank" rel="noopener noreferrer" class="nav-button bg-sky-400 hover:bg-sky-400 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                            Play on LearningApps!
+                        </a>
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_6/8.jpg" alt="prepositions of place" class="rounded-2xl shadow-md w-full max-w-4xl">
+                </div>
+            </div>
+
+            <div class="activity-card sky-400">
+
+                <div class="flex flex-col items-center gap-6">
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_6/47.png" alt="What's in the bag?" class="rounded-2xl shadow-md w-full max-w-2xl">
+                    <p class="text-lg text-gray-600">Click play to listen</p>
+                    <audio controls src="https://johanka2014.github.io/get_ready_for_starters/Revision_1/22_Pista_22.avi" class="w-full max-w-md">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+
+            <div class="activity-card border-sky-400">
+                <div class="flex justify-center">
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_6/48.png" alt="Practice test" class="rounded-2xl shadow-md w-full max-w-4xl">
+                </div>
+                <div class="flex justify-center">
+                    <img src="https://johanka2014.github.io/get_ready_for_starters/mod_6/49.png" alt="Example" class="rounded-2xl shadow-md w-full max-w-4xl">
+                </div>
+
+            </div>
+
+            <div class="activity-card border-sky-400">
+                <h2 class="text-3xl font-bold text-center text-sky-400 mb-6">Listening Test</h2>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <img src="https://johanka2014.github.io/get_ready_for_starters/mod_6/55.png" alt="Listening test" class="rounded-2xl shadow-md w-full">
+                    </div>
+                    <div class="text-center">
+
+                        <a href="https://wordwall.net/resource/107054313" target="_blank" rel="noopener noreferrer" class="nav-button bg-sky-400 hover:bg-sky-400 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                            Play on Wordwall!
+                        </a>
+
+                        <div class="text-center">
+
+                            <a href="https://online.flipbuilder.com/sdtta/uqtx/mobile/index.html#p=46" target="_blank" rel="noopener noreferrer" class="nav-button bg-sky-400 hover:bg-sky-400 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                                Audio Link
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+
+            <section id="school" class="content-section">
+             <div class="space-y-8"><!--this line of code creates a gap between cards-->
+
+            <div class="activity-card border-rose-400">
+                <h2 class="text-3xl font-bold text-center text-rose-600 mb-6">We love school!</h2>
+                <img src="https://placehold.co/800x400/f43f5e/FFFFFF?text=Classroom+Fun" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Classroom objects and school activities can go here.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="playground" class="content-section">
+             <div class="space-y-8"><!--this line of code creates a gap between cards-->
+
+            <div class="activity-card border-violet-400">
+                <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">In the playground</h2>
+                <img src="https://placehold.co/800x400/8b5cf6/FFFFFF?text=Let's+Play!" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Games about playground toys and activities.</p>
+            </div>
+             <div classs="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="hobbies" class="content-section">
+             <div class="space-y-8"><!--this line of code creates a gap between cards-->
+
+            <div class="activity-card border-emerald-400">
+                <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">My hobbies</h2>
+                <img src="https://placehold.co/800x400/10b981/FFFFFF?text=Fun+Activities" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Activities about different hobbies and free time.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="day" class="content-section">
+             <div class="space-y-8"><!--this line of code creates a gap between cards-->
+
+            <div class="activity-card border-orange-400">
+                <h2 class="text-3xl font-bold text-center text-orange-600 mb-6">Your day</h2>
+                <img src="https://placehold.co/800x400/f97316/FFFFFF?text=Daily+Routine" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Activities about daily routines can go here.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="revision2" class="content-section">
+             <div class="space-y-8"><!--this line of code creates a gap between cards-->
+
+            <div class="activity-card border-gray-500">
+                <h2 class="text-3xl font-bold text-center text-gray-600 mb-6">Revision 2</h2>
+                <img src="https://placehold.co/800x400/6b7280/FFFFFF?text=Practice+Time!" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">This section is for reviewing units 6-10.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="street" class="content-section">
+             <div class="space-y-8"><!--this line of code creates a gap between cards-->
+
+            <div class="activity-card border-teal-400">
+                <h2 class="text-3xl font-bold text-center text-teal-600 mb-6">In the street</h2>
+                <img src="https://placehold.co/800x400/14b8a6/FFFFFF?text=Around+Town" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Activities about places and transport in town.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="grandparents" class="content-section">
+             <div class="space-y-8"><!--this line of code creates a gap between cards-->
+
+            <div class="activity-card border-sky-400">
+                <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">My grandparents</h2>
+                <img src="https://placehold.co/800x400/38bdf8/FFFFFF?text=Grandma+%26+Grandpa" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Activities about grandparents and extended family.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="zoo" class="content-section">
+             <div class="space-y-8"><!--this line of code creates a gap between cards-->
+
+            <div class="activity-card border-rose-400">
+                <h2 class="text-3xl font-bold text-center text-rose-600 mb-6">Going to the zoo</h2>
+                <img src="https://placehold.co/800x400/f43f5e/FFFFFF?text=Zoo+Animals" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Activities about wild animals at the zoo.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="birthday" class="content-section">
+             <div class="space-y-8"><!--this line of code creates a gap between cards-->
+
+            <div class="activity-card border-violet-400">
+                <h2 class="text-3xl font-bold text-center text-violet-600 mb-6">Happy birthday!</h2>
+                <img src="https://placehold.co/800x400/8b5cf6/FFFFFF?text=Party+Time!" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Birthday party vocabulary and songs can go here.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="beach" class="content-section">
+             <div class="space-y-8"><!--this line of code creates a gap between cards-->
+
+            <div class="activity-card border-emerald-400">
+                <h2 class="text-3xl font-bold text-center text-emerald-600 mb-6">At the beach</h2>
+                <img src="https://placehold.co/800x400/10b981/FFFFFF?text=Sun+%26+Sand" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">Games about beach activities and objects.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="revision3" class="content-section">
+             <div class="space-y-8"><!--this line of code creates a gap between cards-->
+
+            <div class="activity-card border-gray-500">
+                <h2 class="text-3xl font-bold text-center text-gray-600 mb-6">Revision 3</h2>
+                <img src="https://placehold.co/800x400/6b7280/FFFFFF?text=Final+Review!" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">This section is for reviewing units 11-15.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+        <section id="wordlist" class="content-section">
+             <div class="space-y-8"><!--this line of code creates a gap between cards-->
+
+            <div class="activity-card border-orange-400">
+                <h2 class="text-3xl font-bold text-center text-orange-600 mb-6">Wordlist</h2>
+                <img src="https://placehold.co/800x400/f97316/FFFFFF?text=All+the+Words!" alt="Placeholder" class="rounded-2xl shadow-md w-full mx-auto">
+                <p class="text-center mt-4 text-xl">A list of all the vocabulary from the modules.</p>
+            </div>
+             <div class="text-center mt-8">
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+            </div>
+        </section>
+        
+    </main>
+
+    <script>
+        // --- Navigation Logic ---
+        const sections = document.querySelectorAll('.content-section');
+        const navButtons = document.querySelectorAll('.nav-button');
+
+        function showSection(sectionId) {
+            const targetSection = document.getElementById(sectionId);
+            if (!targetSection) {
+                console.warn(`Section with ID '${sectionId}' not found.`);
+                return;
+            }
+
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            navButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            targetSection.classList.add('active');
+            
+            // Find the button that links to this section
+            // Using getAttribute is safer than checking the onclick property directly for string matching
+            const activeBtn = Array.from(navButtons).find(btn => {
+                const onclickVal = btn.getAttribute('onclick');
+                return onclickVal && onclickVal.includes(`'${sectionId}'`);
+            });
+
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+            
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // --- Boy or Girl Name Game ---
+        const nameData = {
+            'Dan': 'boy', 'Tony': 'boy',
+            'Sue': 'girl', 'Anna': 'girl', 'Jill': 'girl', 'May': 'girl', 'Grace': 'girl',
+            'Alex': 'both', 'Pat': 'both'
+        };
+
+        const nameBank = document.getElementById('name-bank');
+        const dropZones = document.querySelectorAll('.drop-zone');
+        const resetNamesBtn = document.getElementById('reset-names-btn');
+
+        function initializeNameGame() {
+            if (!nameBank) return; // Don't run if not on the right page
+            nameBank.innerHTML = '';
+            dropZones.forEach(zone => zone.innerHTML = '');
+
+            Object.keys(nameData).forEach(name => {
+                const nameEl = document.createElement('div');
+                nameEl.textContent = name;
+                nameEl.id = `name-${name}`;
+                nameEl.className = 'draggable-name';
+                nameEl.draggable = true;
+                nameBank.appendChild(nameEl);
+                addDragListeners(nameEl);
+            });
+        }
+
+        function addDragListeners(element) {
+            element.addEventListener('dragstart', () => {
+                element.classList.add('dragging');
+            });
+            element.addEventListener('dragend', () => {
+                element.classList.remove('dragging');
+            });
+        }
+
+        dropZones.forEach(zone => {
+            zone.addEventListener('dragover', e => {
+                e.preventDefault();
+                zone.classList.add('drag-over');
+            });
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('drag-over');
+            });
+            zone.addEventListener('drop', e => {
+                e.preventDefault();
+                zone.classList.remove('drag-over');
+                const draggingEl = document.querySelector('.dragging');
+                if (!draggingEl) return;
+
+                const name = draggingEl.textContent;
+                const correctCategory = nameData[name];
+                const dropCategory = zone.dataset.category;
+
+                if (correctCategory === dropCategory) {
+                    draggingEl.classList.remove('dragging');
+                    draggingEl.classList.add('correctly-placed');
+                    draggingEl.draggable = false;
+                    zone.appendChild(draggingEl);
+                } else {
+                    zone.classList.add('incorrect-drop');
+                    setTimeout(() => zone.classList.remove('incorrect-drop'), 500);
+                }
+            });
+        });
+
+        if (resetNamesBtn) {
+            resetNamesBtn.addEventListener('click', initializeNameGame);
+        }
+        
+        // --- Listen and Choose Game ---
+        const listenChooseData = {
+            allNames: ["Tom", "Sue", "Alex", "Ben", "Mr. Ride", "Ann", "May", "Nick", "Happy", "Kim", "Mrs. Duck", "Pat"],
+            correctAnswers: ["Tom", "Alex", "Mr. Ride", "May", "Happy", "Mrs. Duck"]
+        };
+
+        const listenChooseOptionsContainer = document.getElementById('listen-choose-options');
+        const listenChooseFeedbackEl = document.getElementById('listen-choose-feedback');
+        let foundAnswers = 0;
+
+        function initializeListenChooseGame() {
+            if (!listenChooseOptionsContainer) return; // Don't run if not on the right page
+            
+            listenChooseOptionsContainer.innerHTML = '';
+            listenChooseFeedbackEl.innerHTML = `Found: 0 / ${listenChooseData.correctAnswers.length}`;
+            listenChooseFeedbackEl.style.color = '#4B5563'; // Reset color
+            foundAnswers = 0;
+
+            const shuffledNames = listenChooseData.allNames.sort(() => 0.5 - Math.random());
+
+            shuffledNames.forEach(name => {
+                const button = document.createElement('button');
+                button.textContent = name;
+                button.className = 'option-button bg-sky-200 hover:bg-sky-300 font-bold py-3 px-6 rounded-lg text-lg';
+                button.onclick = () => checkListenChooseAnswer(name, button);
+                listenChooseOptionsContainer.appendChild(button);
+            });
+
+            let resetButton = document.getElementById('listen-reset-btn');
+            if (!resetButton) {
+                resetButton = document.createElement('button');
+                resetButton.id = 'listen-reset-btn';
+                resetButton.textContent = 'Play Again';
+                resetButton.className = 'nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg mt-6';
+                resetButton.onclick = initializeListenChooseGame;
+                document.getElementById('listen-choose-game').appendChild(resetButton);
+            }
+        }
+
+        function checkListenChooseAnswer(selectedName, button) {
+            if (button.disabled) return;
+            button.disabled = true;
+
+            if (listenChooseData.correctAnswers.includes(selectedName)) {
+                button.classList.add('correct');
+                foundAnswers++;
+                listenChooseFeedbackEl.textContent = `Found: ${foundAnswers} / ${listenChooseData.correctAnswers.length}`;
+                if (foundAnswers === listenChooseData.correctAnswers.length) {
+                    listenChooseFeedbackEl.textContent = 'Great job! You found all the names!';
+                    listenChooseFeedbackEl.style.color = '#10B981';
+                }
+            } else {
+                button.classList.add('incorrect');
+            }
+        }
+        
+        // --- Written Names Game ---
+        const writtenNamesData = [
+            { question: "1. What's his name?", answer: "Ben" },
+            { question: "2. What's his name?", answer: "Sam" },
+            { question: "3. What's her name?", answer: "Lucy" },
+            { question: "4. What's his name?", answer: "Nick" },
+            { question: "5. What's his name?", answer: "Bill" },
+            { question: "6. What's her name?", answer: "Ann" },
+            { question: "7. What's his name?", answer: "Tom" },
+            { question: "8. What's her name?", answer: "Kim" }
+        ];
+
+        const writtenNamesGameContainer = document.getElementById('written-names-game');
+        
+        function initializeWrittenNamesGame() {
+            if (!writtenNamesGameContainer) return; // Don't run if not on the right page
+            
+            writtenNamesGameContainer.innerHTML = '';
+            writtenNamesData.forEach((item, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'grid grid-cols-2 gap-2 items-center';
+                
+                const label = document.createElement('label');
+                label.textContent = item.question;
+                label.htmlFor = `name-input-${index}`;
+                
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.id = `name-input-${index}`;
+                input.dataset.answer = item.answer;
+                input.className = 'name-input w-full';
+                
+                questionDiv.appendChild(label);
+                questionDiv.appendChild(input);
+                writtenNamesGameContainer.appendChild(questionDiv);
+            });
+        }
+
+        function checkWrittenNames() {
+            const feedbackEl = document.getElementById('written-names-feedback');
+            if (!feedbackEl) return;
+            
+            let allCorrect = true;
+            writtenNamesData.forEach((item, index) => {
+                const inputEl = document.getElementById(`name-input-${index}`);
+                const userAnswer = inputEl.value.trim();
+                
+                inputEl.classList.remove('correct-input', 'incorrect-input');
+
+                if (userAnswer.toLowerCase() === item.answer.toLowerCase()) {
+                    inputEl.classList.add('correct-input');
+                } else {
+                    inputEl.classList.add('incorrect-input');
+                    allCorrect = false;
+                }
+            });
+
+            if (allCorrect) {
+                feedbackEl.textContent = 'Excellent! All correct!';
+                feedbackEl.style.color = '#10B981';
+            } else {
+                feedbackEl.textContent = 'Some are not quite right. Try again!';
+                feedbackEl.style.color = '#EF4444';
+            }
+        }
+
+        // --- Word Match Game ---
+        const wordMatchData = [
+            { image: 'https://johanka2014.github.io/get_ready_for_starters/hello/two.jpg', options: ['cat', 'dog', 'hat'], answer: 'cat' },
+            { image: 'https://johanka2014.github.io/get_ready_for_starters/hello/three.jpg', options: ['elephant', 'apple', 'boat'], answer: 'elephant' },
+            { image: 'https://johanka2014.github.io/get_ready_for_starters/hello/six.jpg', options: ['dog', 'cat', 'kite'], answer: 'dog' },
+            { image: 'https://johanka2014.github.io/get_ready_for_starters/hello/eight.jpg', options: ['hat', 'tree', 'flower'], answer: 'hat' },
+            { image: 'https://johanka2014.github.io/get_ready_for_starters/hello/nine.jpg', options: ['tree', 'ice cream', 'dog'], answer: 'tree' },
+            { image: 'https://johanka2014.github.io/get_ready_for_starters/hello/ten.jpg', options: ['flower', 'hat', 'apple'], answer: 'flower' },
+            { image: 'https://johanka2014.github.io/get_ready_for_starters/hello/eleven.jpg', options: ['apple', 'boat', 'elephant'], answer: 'apple' },
+            { image: 'https://johanka2014.github.io/get_ready_for_starters/hello/thirteen.jpg', options: ['boat', 'kite', 'cat'], answer: 'boat' }
+        ];
+
+        let currentWordMatchIndex = 0;
+        const wordMatchImageEl = document.getElementById('word-match-image');
+        const wordMatchOptionsEl = document.getElementById('word-match-options');
+        const wordMatchFeedbackEl = document.getElementById('word-match-feedback');
+        const wordMatchNextBtn = document.getElementById('word-match-next-btn');
+
+        function showWordMatchQuestion(index) {
+            const question = wordMatchData[index];
+            wordMatchImageEl.src = question.image;
+            wordMatchOptionsEl.innerHTML = '';
+            wordMatchFeedbackEl.innerHTML = '';
+            wordMatchNextBtn.classList.add('hidden');
+
+            // Shuffle options
+            const shuffledOptions = question.options.sort(() => Math.random() - 0.5);
+
+            shuffledOptions.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.className = 'option-button bg-sky-200 hover:bg-sky-300 font-bold py-3 px-8 rounded-lg text-xl';
+                button.onclick = () => checkWordMatchAnswer(option, button);
+                wordMatchOptionsEl.appendChild(button);
+            });
+        }
+
+        function checkWordMatchAnswer(selectedOption, button) {
+            const correctAnswer = wordMatchData[currentWordMatchIndex].answer;
+            const allButtons = wordMatchOptionsEl.querySelectorAll('button');
+            allButtons.forEach(btn => btn.disabled = true);
+
+            if (selectedOption === correctAnswer) {
+                button.classList.add('correct');
+                wordMatchFeedbackEl.textContent = 'Correct!';
+                wordMatchFeedbackEl.style.color = '#10B981';
+            } else {
+                button.classList.add('incorrect');
+                wordMatchFeedbackEl.textContent = `It's a ${correctAnswer}.`;
+                wordMatchFeedbackEl.style.color = '#EF4444';
+                 allButtons.forEach(btn => {
+                    if (btn.textContent === correctAnswer) {
+                        btn.classList.add('correct');
+                    }
+                });
+            }
+
+            wordMatchNextBtn.classList.remove('hidden');
+            if (currentWordMatchIndex === wordMatchData.length - 1) {
+                wordMatchNextBtn.textContent = 'Play Again';
+            } else {
+                wordMatchNextBtn.textContent = 'Next';
+            }
+        }
+        
+        if (wordMatchNextBtn) {
+            wordMatchNextBtn.addEventListener('click', () => {
+                currentWordMatchIndex++;
+                if (currentWordMatchIndex >= wordMatchData.length) {
+                    currentWordMatchIndex = 0;
+                }
+                showWordMatchQuestion(currentWordMatchIndex);
+            });
+        }
+        
+        function initializeWordMatchGame() {
+            if (!wordMatchImageEl) return; // Don't run if not on the right page
+            currentWordMatchIndex = 0;
+            showWordMatchQuestion(currentWordMatchIndex);
+        }
+
+        // --- Prepositions Activity (Where's Sam's cat?) ---
+        const prepositionAnswers = {
+            "preposition-1": "in front of",
+            "preposition-2": "under",
+            "preposition-3": "behind",
+            "preposition-4": "between"
+        };
+
+        function checkPrepositions() {
+            const feedbackEl = document.getElementById('preposition-feedback');
+            if (!feedbackEl) return;
+            
+            let allCorrect = true;
+            let correctCount = 0;
+            const totalQuestions = Object.keys(prepositionAnswers).length;
+
+            for (const inputId in prepositionAnswers) {
+                const inputEl = document.getElementById(inputId);
+                if (inputEl) {
+                    const userAnswer = inputEl.value.trim().toLowerCase();
+                    const correctAnswer = prepositionAnswers[inputId].toLowerCase();
+
+                    inputEl.classList.remove('correct-input', 'incorrect-input');
+
+                    if (userAnswer === correctAnswer) {
+                        inputEl.classList.add('correct-input');
+                        correctCount++;
+                    } else {
+                        inputEl.classList.add('incorrect-input');
+                        allCorrect = false;
+                    }
+                } else {
+                    allCorrect = false; // Mark as incorrect if element not found
+                }
+            }
+
+            if (allCorrect) {
+                feedbackEl.textContent = `Fantastic! All ${totalQuestions} correct!`;
+                feedbackEl.style.color = '#10B981';
+            } else {
+                feedbackEl.textContent = `You got ${correctCount} out of ${totalQuestions} correct. Keep trying!`;
+                feedbackEl.style.color = '#EF4444';
+            }
+        }
+
+        // --- Story Quiz ---
+        const storyQuizData = [
+            {
+                question: "1. Who is looking for the phone?",
+                options: ["Sam", "Sam's mom", "The dog"],
+                answer: "Sam's mom"
+            },
+            {
+                question: "2. Is the phone in the bedroom?",
+                options: ["Yes, it is", "No, it isn't"],
+                answer: "No, it isn't"
+            },
+            {
+                question: "3. Where does Sam's mom think the phone is? (Frame 3)",
+                options: ["In the garden", "In the car", "In the living room"],
+                answer: "In the car"
+            },
+            {
+                question: "4. Where is the phone at the end?",
+                options: ["In the car", "In the living room", "In the garden"],
+                answer: "In the garden"
+            }
+        ];
+
+        const storyQuizContainer = document.getElementById('story-quiz-container');
+
+        function initializeStoryQuiz() {
+            if (!storyQuizContainer) return;
+            storyQuizContainer.innerHTML = '';
+
+            storyQuizData.forEach((item, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'story-question';
+                
+                const questionP = document.createElement('p');
+                questionP.className = 'text-lg font-semibold mb-3';
+                questionP.textContent = item.question;
+                questionDiv.appendChild(questionP);
+
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'flex flex-wrap gap-3';
+                optionsDiv.id = `story-q-${index}`;
+
+                item.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = 'option-button bg-violet-200 hover:bg-violet-300 font-semibold py-2 px-4 rounded-lg text-md';
+                    // We use a data attribute to store the "group" for checking
+                    button.dataset.group = `story-q-${index}`;
+                    button.dataset.answer = option;
+                    button.onclick = () => selectStoryOption(button);
+                    optionsDiv.appendChild(button);
+                });
+
+                questionDiv.appendChild(optionsDiv);
+                storyQuizContainer.appendChild(questionDiv);
+            });
+
+            const checkBtn = document.getElementById('story-quiz-check-btn');
+            if(checkBtn){
+                checkBtn.onclick = checkStoryQuiz;
+            }
+        }
+
+        function selectStoryOption(selectedButton) {
+            // Get all buttons in the same group
+            const groupName = selectedButton.dataset.group;
+            const buttonsInGroup = document.querySelectorAll(`button[data-group="${groupName}"]`);
+            
+            // Remove 'selected' class from all buttons in the group
+            buttonsInGroup.forEach(btn => {
+                btn.classList.remove('bg-violet-500', 'text-white');
+                btn.classList.add('bg-violet-200', 'hover:bg-violet-300');
+                btn.dataset.selected = 'false';
+            });
+
+            // Add 'selected' class to the clicked button
+            selectedButton.classList.add('bg-violet-500', 'text-white');
+            selectedButton.classList.remove('bg-violet-200', 'hover:bg-violet-300');
+            selectedButton.dataset.selected = 'true';
+        }
+
+        function checkStoryQuiz() {
+            const feedbackEl = document.getElementById('story-quiz-feedback');
+            if (!feedbackEl) return;
+
+            let allCorrect = true;
+            let correctCount = 0;
+            const totalQuestions = storyQuizData.length;
+
+            storyQuizData.forEach((item, index) => {
+                const groupName = `story-q-${index}`;
+                const buttonsInGroup = document.querySelectorAll(`button[data-group="${groupName}"]`);
+                const selectedButton = document.querySelector(`button[data-group="${groupName}"][data-selected="true"]`);
+                
+                // Reset styles
+                buttonsInGroup.forEach(btn => {
+                    btn.classList.remove('correct', 'incorrect');
+                });
+
+                if (selectedButton) {
+                    const userAnswer = selectedButton.dataset.answer;
+                    if (userAnswer === item.answer) {
+                        selectedButton.classList.add('correct');
+                        correctCount++;
+                    } else {
+                        selectedButton.classList.add('incorrect');
+                        allCorrect = false;
+                        // Also show the correct one
+                        buttonsInGroup.forEach(btn => {
+                            if (btn.dataset.answer === item.answer) {
+                                btn.classList.add('correct');
+                            }
+                        });
+                    }
+                } else {
+                    // No answer selected for this question
+                    allCorrect = false;
+                }
+            });
+
+            if (allCorrect) {
+                feedbackEl.textContent = `Excellent! All ${totalQuestions} correct!`;
+                feedbackEl.style.color = '#10B981';
+            } else {
+                feedbackEl.textContent = `You got ${correctCount} out of ${totalQuestions}. Check the answers!`;
+                feedbackEl.style.color = '#EF4444';
+            }
+        }
+
+        // --- Family Quiz (Yes/No) ---
+        // Removed the interactive quiz JavaScript
+
+        // --- Look and Complete the Words. Match! Activity ---
+        const lookCompleteWordAnswers = {
+            "complete-input-1a": "l", "complete-input-1b": "w", "complete-input-1c": "r", // flowers
+            "complete-input-2a": "i", "complete-input-2b": "t", "complete-input-2c": "r", // picture
+            "complete-input-3a": "e", "complete-input-3b": "s", // desk
+            "complete-input-4a": "a", "complete-input-4b": "i", // radio
+            "complete-input-a1": "i", "complete-input-a2": "i", "complete-input-a3": "o", "complete-input-a4": "o", "complete-input-a5": "m", // dining room
+            "complete-input-b1": "i", "complete-input-b2": "i", "complete-input-b3": "i", "complete-input-b4": "o", "complete-input-b5": "m", // living room
+            "complete-input-c1": "a", "complete-input-c2": "e", "complete-input-c3": "e", // garden
+            "complete-input-d1": "i", "complete-input-d2": "c", "complete-input-d3": "e" // kitchen
+        };
+
+        const matchData = {
+            "flowers": "match-zone-c", // garden
+            "picture": "match-zone-b", // living room
+            "desk": "match-zone-a",    // dining room
+            "radio": "match-zone-d"    // kitchen
+        };
+
+        function initializeLookAndComplete() {
+            // Reset input fields
+            for (const inputId in lookCompleteWordAnswers) {
+                const inputEl = document.getElementById(inputId);
+                if (inputEl) {
+                    inputEl.value = '';
+                    inputEl.classList.remove('correct-input', 'incorrect-input');
+                    inputEl.disabled = false;
+                }
+            }
+
+            // Reset draggable items and drop zones
+            const draggableItems = document.querySelectorAll('.draggable-match-item');
+            const matchDropZones = document.querySelectorAll('.match-drop-zone');
+
+            draggableItems.forEach(item => {
+                item.classList.remove('correctly-placed');
+                item.draggable = true;
+                item.style.opacity = '1';
+                // Move item back to its original parent if it was moved
+                const originalParent = document.getElementById(item.id.replace('match-item-', 'item-container-'));
+                if (originalParent && item.parentNode !== originalParent) {
+                     originalParent.appendChild(item);
+                }
+            });
+
+            matchDropZones.forEach(zone => {
+                zone.innerHTML = '';
+                zone.classList.remove('correctly-placed');
+                zone.classList.remove('drag-over');
+            });
+            
+            const feedbackEl = document.getElementById('look-complete-feedback');
+            if(feedbackEl) {
+                feedbackEl.textContent = '';
+            }
+        }
+
+        function checkLookAndComplete() {
+            let allWordsCorrect = true;
+            let allMatchesCorrect = true;
+            const feedbackEl = document.getElementById('look-complete-feedback');
+            let totalWordCorrect = 0;
+            const totalWords = Object.keys(lookCompleteWordAnswers).length;
+
+            // Check fill-in-the-blanks
+            for (const inputId in lookCompleteWordAnswers) {
+                const inputEl = document.getElementById(inputId);
+                if (inputEl) {
+                    const userAnswer = inputEl.value.trim().toLowerCase();
+                    const correctAnswer = lookCompleteWordAnswers[inputId].toLowerCase();
+
+                    inputEl.classList.remove('correct-input', 'incorrect-input');
+
+                    if (userAnswer === correctAnswer) {
+                        inputEl.classList.add('correct-input');
+                        totalWordCorrect++;
+                    } else {
                         inputEl.classList.add('incorrect-input');
                         allWordsCorrect = false;
                     }

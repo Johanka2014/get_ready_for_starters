@@ -3,16 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Hello</title>
-</head>
-<body>
-    <h1>Hello World</h1>
-    <img src="image.jpg" onerror="this.src='fallback.jpg'">
-    <img src="image2.jpg" onerror="this.src='fallback2.jpg'">
-    <div class="border-gray-500"></div>
-    <div class="border-sky-400"></div>
-    <div class="class"></div>
-    <script src="script.js"></script>
+    <title>Get ready for starters</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FEF3C7; /* Amber 100 */
+        }
+        .title-font {
+            font-family: 'Balsamiq Sans', cursive;
+        }
+        .activity-card {
+            background-color: white;
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            border: 4px solid transparent;
+        }
+        .activity-card:hover {
+            transform: translateY(-5px);
+        }
+        .nav-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .nav-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        .nav-button.active {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 4px #FBBF24; /* Amber 400 */
+        }
+        /* Hide all sections by default */
+        .content-section {
+            display: none;
+        }
+        /* Show the active section */
+        .content-section.active {
+            display: block;
+        }
+
+        /* Styles for the Name Game */
+        .name-bank {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background-color: #f3f4f6;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .draggable-name {
+            padding: 0.5rem 1rem;
+            background-color: #e0f2fe; /* sky-100 */
+            color: #0c4a6e; /* sky-900 */
+            border: 2px solid #7dd3fc; /* sky-300 */
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: grab;
+            transition: all 0.2s ease-in-out;
+        }
+        .draggable-name:hover {
+            transform: scale(1.1);
+        }
+        .draggable-name.dragging {
+            opacity: 0.5;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+                        inputEl.classList.add('incorrect-input');
+                        allWordsCorrect = false;
+                    }
+                }
+            }
+
+            // Check matches
+            for (const itemKey in matchData) {
+                const correctZoneId = matchData[itemKey]; // e.g., "match-zone-a"
+                const correctZone = document.getElementById(correctZoneId);
+                const droppedItem = correctZone.querySelector('.draggable-match-item');
+
+                if (droppedItem && droppedItem.dataset.matchId === itemKey) {
+                    // Correct match
+                    // Styling for correct drop is applied during drop event
+                } else {
+                    allMatchesCorrect = false;
+                    // If a zone is empty or has a wrong item, mark it
+                    correctZone.classList.remove('correctly-placed'); // Ensure it's not marked correct if empty/wrong
+                    correctZone.classList.add('incorrect-drop'); // Add temporary shake effect
+                    setTimeout(() => correctZone.classList.remove('incorrect-drop'), 500);
+                }
+            }
+
+            if (allWordsCorrect && allMatchesCorrect) {
+                feedbackEl.textContent = 'Fantastic! All words completed and matched correctly!';
+                feedbackEl.style.color = '#10B981';
+            } else if (allWordsCorrect) {
+                feedbackEl.textContent = 'Words are correct! Now check your matches.';
+                feedbackEl.style.color = '#EF4444';
+            }
+            else if (allMatchesCorrect) {
+                feedbackEl.textContent = 'Matches are correct! Now check your words.';
+                feedbackEl.style.color = '#EF4444';
+            }
+            else {
+                feedbackEl.textContent = `You got ${totalWordCorrect} out of ${totalWords} words correct. Keep trying! Also check your matches.`;
+                feedbackEl.style.color = '#EF4444';
+            }
+        }
+
+        // Drag and Drop for Matching (Look and Complete)
+        let draggedItem = null;
+
+        document.querySelectorAll('.draggable-match-item').forEach(item => {
+            item.addEventListener('dragstart', (e) => {
+                draggedItem = item;
+                e.dataTransfer.setData('text/plain', item.dataset.matchId);
+                item.classList.add('dragging');
+            });
+
+            item.addEventListener('dragend', () => {
+                item.classList.remove('dragging');
+                draggedItem = null;
+            });
+        });
+
+        document.querySelectorAll('.match-drop-zone').forEach(zone => {
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault(); // Allow drop
+                zone.classList.add('drag-over');
+            });
+
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('drag-over');
+            });
+
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.classList.remove('drag-over');
+
+                if (draggedItem && zone.children.length === 0) { // Only drop if zone is empty
+                    const droppedItemId = e.dataTransfer.getData('text/plain');
+                    
+                    if (zone.dataset.correctItem === droppedItemId) {
+                        zone.appendChild(draggedItem);
+                        draggedItem.classList.add('correctly-placed');
+                        draggedItem.draggable = false;
+                    } else {
+                        zone.classList.add('incorrect-drop');
+                        setTimeout(() => zone.classList.remove('incorrect-drop'), 500);
+                    }
+                }
+            });
+        });
+
+        function resetLookAndComplete() {
+            initializeLookAndComplete();
+        }
+
+
+        // Initialize all games on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeNameGame();
+            initializeListenChooseGame();
+            initializeWrittenNamesGame();
+            initializeWordMatchGame();
+            initializeStoryQuiz();
+            initializeLookAndComplete(); // Initialize the new activity
+            // initializeFamilyQuiz(); // Removed call for family quiz
+        });
+        
+        // Ensure initialization runs even if DOMContentLoaded already fired
+        initializeNameGame();
+        initializeListenChooseGame();
+        initializeWrittenNamesGame();
+        initializeWordMatchGame();
+        initializeStoryQuiz();
+        initializeLookAndComplete();
+        // initializeFamilyQuiz(); // Removed call for family quiz
+
+
+    </script>
+
 </body>
 </html>
